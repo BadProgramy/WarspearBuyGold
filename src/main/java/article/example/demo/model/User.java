@@ -14,12 +14,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique = true)
-    private String username;
+    private String username;//почта
     private String password;
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
+
+    private String firstname;
+    private String secondname;
+    private String pagevk;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "users_role", joinColumns = @JoinColumn(name = "users_id"))
@@ -95,5 +99,48 @@ public class User implements UserDetails {
 
     public void setRole(List<Role> role) {
         this.role = role;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getSecondname() {
+        return secondname;
+    }
+
+    public void setSecondname(String secondname) {
+        this.secondname = secondname;
+    }
+
+    public String getPagevk() {
+        return pagevk;
+    }
+
+    public void setPagevk(String pagevk) {
+        this.pagevk = pagevk;
+    }
+
+    public List<Role> getRole() {
+        return role;
+    }
+
+
+
+    public void update(User user) {
+        if (user.getUsername()!=null)
+            username = user.getUsername();
+        if (user.getPassword()!=null)
+            password = user.getPassword();
+        if (user.getFirstname()!=null)
+            firstname = user.getFirstname();
+        if (user.getSecondname()!=null)
+            secondname = user.getSecondname();
+        if (user.getPagevk()!=null)
+            pagevk = user.getPagevk();
     }
 }

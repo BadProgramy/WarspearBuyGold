@@ -546,6 +546,10 @@
             transition: width 0s ease;
         }
 
+        .input-group {
+            margin-bottom: 20px;
+        }
+
 
         /* фон затемнения на основной контент
          * при этом элементы блокируютя
@@ -592,77 +596,97 @@
 </head>
 
 <body>
-    <!-- 
-    Скрытый checkbox, отвечающий за переключение панели, должен быть в верхней части документа, лучше сразу после тега `<body>`
+<!--
+Скрытый checkbox, отвечающий за переключение панели, должен быть в верхней части документа, лучше сразу после тега `<body>`
 
-    `id` атрибут предназначен для связки с атрибутом `for` тега <label>
+`id` атрибут предназначен для связки с атрибутом `for` тега <label>
 
-    Атрибут `hidden` указывает состояние «скрытый» у текущего элемента
+Атрибут `hidden` указывает состояние «скрытый» у текущего элемента
+-->
+<input type="checkbox" id="nav-toggle" hidden>
+<!--
+Выдвижную панель размещаете ниже
+флажка (checkbox), но не обязательно
+непосредственно после него, например
+можно и в конце страницы
+-->
+<nav class="nav">
+    <!--
+Метка с именем `id` чекбокса в `for` атрибуте
+Символ Unicode 'TRIGRAM FOR HEAVEN' (U+2630)
+Пустой атрибут `onclick` используем для исправления бага в iOS < 6.0
+См: http://timpietrusky.com/advanced-checkbox-hack
+-->
+    <label for="nav-toggle" class="nav-toggle" onclick></label>
+    <!--
+Здесь размещаете любую разметку,
+если это меню, то скорее всего неупорядоченный список <ul>
+-->
+    <h2 class="logo" th:object="${user}">
+        <a href="/warspear/profile" th:text="${user.username}"></a>
+    </h2>
+    <ul>
+        <li><a href="/warspear/main">Главное</a>
+        <li><a href="/warspear/buyGold">Купить голд</a>
+        <li><a href="#3">Продать голд</a>
+        <li><a href="#4">Мои заказы</a>
+        <li><a href="#5">Выход</a>
+    </ul>
+</nav>
+<!--
+Маска (затемнение) основного контента при включенной панели
+по-умолчанию данная фишка не используется, если оно вам надо,
+    просто расккоментируйте div-контейнер ниже
+
+<div class="mask-content"></div>
     -->
-    <input type="checkbox" id="nav-toggle" hidden>
-    <!-- 
-    Выдвижную панель размещаете ниже
-    флажка (checkbox), но не обязательно 
-    непосредственно после него, например
-    можно и в конце страницы
-    -->
-    <nav class="nav">
-        <!-- 
-    Метка с именем `id` чекбокса в `for` атрибуте
-    Символ Unicode 'TRIGRAM FOR HEAVEN' (U+2630)
-    Пустой атрибут `onclick` используем для исправления бага в iOS < 6.0
-    См: http://timpietrusky.com/advanced-checkbox-hack 
-    -->
-        <label for="nav-toggle" class="nav-toggle" onclick></label>
-        <!-- 
-    Здесь размещаете любую разметку,
-    если это меню, то скорее всего неупорядоченный список <ul>
-    -->
-        <h2 class="logo" th:object="${user}">
-            <a href="/warspear/profile" th:text="${user.username}"></a>
-        </h2>
-        <ul>
-            <li><a href="/warspear/main">Главное</a>
-            <li><a href="/warspear/buyGold">Купить голд</a>
-            <li><a href="#3">Продать голд</a>
-            <li><a href="#4">Мои заказы</a>
-            <li><a href="#5">Выход</a>
-        </ul>
-    </nav>
-    <!-- 
-    Маска (затемнение) основного контента при включенной панели
-    по-умолчанию данная фишка не используется, если оно вам надо,
-		просто расккоментируйте div-контейнер ниже
-		
-    <div class="mask-content"></div>
-		-->
-		
-    <!-- 
-    Далее размещаем любую разметку,
-    много слов, картинки и т.д...
-    -->
-    <main role="main">
-        <article>
-            <header>
-                <h1 class="header__title">Warspear:</h1>
-                <h2>Продажа/Покупка ГОЛД</h2>
-            </header>
-            <section>
-               <p style="text-align: center;">
-                <a href="index.html" class="btn btn-primary">Продать</a>
-                <a href="right-slide-panel.html" class="btn btn-secondary">Купить</a>
-                <hr>
-                <h3>Как это работает:</h3>
-                <p>Тут сама инструкция</p>
-                <p>Тут сама инструкция</p>
-                <p>Тут сама инструкция</p>
-                <p>Тут сама инструкция</p>
-                <p>Тут сама инструкция</p>
-                <p>Тут сама инструкция</p>
-                <p>Тут сама инструкция</p>
-            </section>
-        </article>
-    </main>
+
+<!--
+Далее размещаем любую разметку,
+много слов, картинки и т.д...
+-->
+<main role="main">
+    <article>
+        <header>
+            <h1 class="header__title">Профиль:</h1>
+            <h2>Заполните данные о себе</h2>
+        </header>
+        <section>
+            <hr>
+            <form th:action="@{/warspear/profile/submit}" th:object="${user}" method="post">
+                <fieldset>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Ваше имя:</span>
+                    <input type="text" class="form-control" placeholder="Иван" aria-describedby="basic-addon1"
+                           name="firstname" th:field="*{firstname}">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Ваше фамилие:</span>
+                    <input type="text" class="form-control" placeholder="Иванов" aria-describedby="basic-addon1"
+                           name="secondname" th:field="*{secondname}">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon3">Ваша почта:</span>
+                    <input type="text" class="form-control" placeholder="example@gmail.com" aria-describedby="basic-addon1"
+                           name="username" th:field="*{username}">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon4">Ваша страницы в вконтакте:</span>
+                    <input type="text" class="form-control" placeholder="vk.com/id12345" aria-describedby="basic-addon1"
+                           name="pagevk" th:field="*{pagevk}">
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+                </div>
+                </fieldset>
+            </form>
+        </section>
+    </article>
+</main>
 </body>
 
 </html>

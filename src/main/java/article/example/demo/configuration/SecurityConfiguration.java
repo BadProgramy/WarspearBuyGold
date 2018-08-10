@@ -29,9 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/warspear").permitAll()
                 .antMatchers("/warspear/editor").authenticated()
-                .antMatchers("/warspear/profile").authenticated()
+                .antMatchers("/warspear/main").authenticated()
                 .and()
-                .formLogin().loginPage("/warspear/login").defaultSuccessUrl("/warspear/profile").permitAll()
+                .formLogin().loginPage("/warspear/login").defaultSuccessUrl("/warspear/main").permitAll()
                 .and()
                 .logout().logoutUrl("/warspear/logout").permitAll();
     }

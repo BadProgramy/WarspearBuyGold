@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.soap.SOAPBinding;
 import javax.sql.DataSource;
@@ -19,20 +20,29 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     public void save(User User) {
         userRepository.save(User);
     }
 
+    @Transactional
     public List<User> getAll() {
         List<User> temp = new ArrayList<>();
         userRepository.findAll().forEach(temp::add);
         return temp;
     }
 
+    @Transactional
+    public void update(User user) {
+        userRepository.save(user);
+    }
+
+    @Transactional
     public void delete(User user) {
         userRepository.delete(user);
     }
 
+    @Transactional
     public void deleteAll() {
         userRepository.deleteAll();
     }
@@ -45,6 +55,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    @Transactional
     public User findUserByName(@NotNull String username) {
         for (User user: userRepository.findAll()) {
             if (user.getUsername().equals(username)) {
