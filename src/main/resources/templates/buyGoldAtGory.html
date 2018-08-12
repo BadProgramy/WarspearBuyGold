@@ -9,6 +9,23 @@
 
 <head>
 
+    <script>
+        function multiplication() {
+            var cena= document.getElementById("gold");
+            var itog= document.getElementById("itog");
+            var orderClick = document.getElementById("orderClick");
+
+            if (Number(cena.value) >= 500) {
+                itog.innerHTML = Number(cena.value) * 0.002 + "руб.";
+                orderClick.disabled = false;
+            }
+            else {
+                    itog.innerHTML = "Такая маленькая сумма не обрабатывается. Минимальная сумма 500 голд";
+                    orderClick.disabled = true;
+            }
+        }
+    </script>
+
     <style>
         @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic);
 
@@ -546,7 +563,14 @@
             transition: width 0s ease;
         }
 
-
+        input {
+            width: 300px;
+            font-size: 13px;
+            padding: 6px 0 4px 10px;
+            border: 1px solid #cecece;
+            background: #F6F6f6;
+            border-radius: 8px;
+        }
         /* фон затемнения на основной контент
          * при этом элементы блокируютя
          * спорная такая фича, если оно вам надо
@@ -652,16 +676,40 @@
             <hr>
             <h3 style="color: crimson">На вашу почту будут отправлены данные от аакаунта с укзанной голдой после проверки оплаты!</h3>
 
-            <form th:action="@{/warspear/order/submit}" th:object="${order}" method="post">
+            <form th:action="@{/warspear/buyGoldGory/submit}" th:object="${order}" method="post">
                 <fieldset>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Количество голд:</span>
-                        <input type="text" class="form-control" placeholder="1000" aria-describedby="basic-addon1"
-                               name="gold" th:field="*{gold}">
+                        <input type="text" class="form-control" placeholder="0" aria-describedby="basic-addon1"
+                               name="gold" th:field="*{gold}" id="gold" required="required"
+                               oninput=multiplication()>
                     </div>
 
-                    <div>
-                        <button type="submit" class="btn btn-success">Заказать</button>
+                    <br>
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">Номер телефона для выставления счета в QIWI:</span>
+                        <input type="text" class="form-control" placeholder="+79371234567" aria-describedby="basic-addon1"
+                               name="numberPhone" th:field="*{numberPhone}" required="required">
+                    </div>
+
+                    <br>
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">Сообщение для администратора:</span>
+                        <input type="text" class="form-control" placeholder="Админ ты красава :)" aria-describedby="basic-addon1"
+                               name="message" th:field="*{message}">
+                    </div>
+
+                    <br>
+
+                    ИТОГО: <b id="itog">0</b>
+
+                    <br>
+                    <br>
+                    <div style="margin-top: 20px">
+                        <button type="submit" class="btn btn-success" id="orderClick"
+                        style="background: darkviolet">Заказать</button>
                     </div>
                 </fieldset>
             </form>
@@ -669,5 +717,4 @@
     </article>
 </main>
 </body>
-
 </html>
