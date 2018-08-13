@@ -59,17 +59,19 @@ public class BuyGoldController {
     }
 
     @RequestMapping(value = "/buyGoldGory/submit", method = RequestMethod.POST)
-    public String buyGoldAtGorySubmit(@ModelAttribute Order order) {
+    public String buyGoldAtGorySubmit(@ModelAttribute Order order, Model model) {
         if (this.user == null) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             this.user = userService.findUserByName(authentication.getName());
         }
-        order.setDescription(BUY_GOLD_GORY);
-        order.setStatus(Status.ИДЕТ_ВЫСТАВЛЕНИЕ_СЧЕТА);
+        order.setDescription(String.valueOf(BUY_GOLD_GORY));
+        order.setStatus(Status.IDET_VYSTAVLENIE_SCHETA);
         order.setDate(LocalDate.now());
         order.setCost(String.valueOf(Double.valueOf(order.getGold())*MULTIPLICATION_GOLD));
-
+        order.setUser(user);
         orderService.save(order);
-        return "buyGoldAtGory";//отправить на страницу заказа
+        model.addAttribute("user",user);
+        model.addAttribute("orders",orderService.getOrdersByUser(user));
+        return "order";//отправить на страницу заказа
     }
 }

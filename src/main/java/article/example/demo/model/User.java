@@ -1,5 +1,6 @@
 package article.example.demo.model;
 
+import org.springframework.boot.util.LambdaSafe;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,6 +30,11 @@ public class User implements UserDetails {
     @CollectionTable(name = "users_role", joinColumns = @JoinColumn(name = "users_id"))
     @Enumerated(EnumType.STRING)
     private List<Role> role;
+
+    /*@ManyToOne
+    @JoinTable(name = "users", inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinColumn(name = "order_id")
+    private List<Order> orders;*/
 
     public Long getId() {
         return id;
@@ -129,7 +135,13 @@ public class User implements UserDetails {
         return role;
     }
 
+    /*public List<Order> getOrders() {
+        return orders;
+    }
 
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }*/
 
     public void update(User user) {
         if (user.getUsername()!=null)
@@ -142,5 +154,14 @@ public class User implements UserDetails {
             secondname = user.getSecondname();
         if (user.getPagevk()!=null)
             pagevk = user.getPagevk();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this==obj) return true;
+        if (obj==null) return false;
+        if (this.getClass()!=obj.getClass()) return false;
+        User Object = (User) obj;
+        return (getUsername().equals(Object.getUsername()));
     }
 }

@@ -17,10 +17,12 @@ public class Order implements Serializable, Comparable<Order> {
     private LocalDate date;
     private String numberPhone;
 
-    private long creationTimestamp;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private long creationTimestamp;
+    private String status;
 
     public Order() {
         this.creationTimestamp = System.currentTimeMillis();
@@ -96,11 +98,19 @@ public class Order implements Serializable, Comparable<Order> {
         this.creationTimestamp = creationTimestamp;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
