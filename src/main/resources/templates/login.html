@@ -3,17 +3,105 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
+
+
+        * {
+            margin:0;
+            padding:0;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        body {
+            background:#2c3e50; /*From http://flatuicolors.com/ */
+        }
+
+        form {
+            position:relative;
+            width:360px;
+            height:250px;
+            margin:50px auto;
+            text-align:center;
+            background:#ecf0f1;
+            padding:40px;
+            -webkit-border-radius:20px 0 0 0;
+            -moz-border-radius:20px 0 0 0;
+            border-radius:20px 0 0 0;
+            -webkit-box-shadow: 0px 1px 0px #ad392d, inset 0px 1px 0px white;
+            -moz-box-shadow: 0px 1px 0px #ad392d, inset 0px 1px 0px white;
+            box-shadow: 0px 1px 0px #ad392d, inset 0px 1px 0px white;
+            box-shadow: 20px 20px 20px;
+        }
+
+        h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size:2em;
+            font-weight:300;
+            margin-bottom:25px;
+            color:#7f8c8d;
+            text-shadow:1px 1px 0px white;
+        }
+
+        input {
+            display:block;
+            width:315px;
+            padding:14px;
+            -webkit-border-radius:6px;
+            -moz-border-radius:6px;
+            border-radius:6px;
+            border:0;
+            margin-bottom:12px;
+            color:#7f8c8d;
+            font-weight:600;
+            font-size:16px;
+        }
+
+        input:focus {
+            background:#fafafa;
+        }
+
+
+        li {
+            position:absolute;
+            right:40px;
+            bottom:50px;
+            list-style:none;
+        }
+
+        a, a:visited {
+            text-decoration:none;
+            color:#7f8c8d;
+            font-weight:400;
+            text-shadow:1px 1px 0px white;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
+        .button {
+            position:relative;
+            float:left;
+            width:145px;
+            margin-top:10px;
+            background:#3498db;
+            color:#fff;
+            font-weight:400;
+            text-shadow:1px 1px 0px #2d7baf;
+            box-shadow:0px 3px 0px #2d7baf;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
         .navbar {
             margin-bottom: 0;
             border-radius: 0;
-        }
-
-        .row.content {
-            height: 450px
         }
 
         footer {
@@ -32,58 +120,21 @@
 </head>
 <body>
 
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="/warspear">Заказы</a></li>
-                <li><a href="/warspear/main">Личный кабинет</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active">
-                    <a href="/warspear/login"><span class="glyphicon glyphicon-log-in"></span> Войти/Регистрация</a>
-                </li>
-            </ul>
+<form th:action="@{/warspear/login}" method="post">
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">
+            Вы ввели неправильные данные
         </div>
     </div>
-</nav>
+    <h4> Авторизация </h4>
+    <input id="username" type="text" class="name" name="username"
+           required="required" placeholder="Ваша почта"/>
+    <input id="password" type="password" class="psw" name="password"
+           placeholder="пароль" required="required"/>
+    <li><a href="/warspear/registration">Регистрация</a></li>
+    <input class="button" type="submit" value="Войти"/>
+</form>
 
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-4 text-left">
-
-            <form th:action="@{/warspear/login}" method="post">
-                <fieldset>
-                    <h2>Введите данные</h2>
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">
-                            Вы ввели неправильные данные
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="username" type="text" class="form-control" name="username"
-                               placeholder="почта" required="required"/>
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="password" type="password" class="form-control" name="password"
-                               placeholder="пароль" required="required"/>
-                    </div>
-                    <br/>
-                    <a href="/warspear/registration">Зарегистрироваться</a>
-                    <br/>
-                    <div>
-                        <button type="submit" class="btn btn-success">Войти</button>
-                    </div>
-                </fieldset>
-            </form>
-            <hr/>
-        </div>
-    </div>
-</div>
 
 </body>
 </html>

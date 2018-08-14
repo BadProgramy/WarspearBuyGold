@@ -44,6 +44,6 @@ public class OrderController {
         orderService.delete(orderId);
         model.addAttribute("user",user);
         model.addAttribute("orders",orderService.getOrdersByUser(user));
-        return "order";
+        return "redirect:../orders";
     }
 }

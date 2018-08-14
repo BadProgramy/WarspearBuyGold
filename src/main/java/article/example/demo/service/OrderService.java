@@ -9,6 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -19,10 +24,22 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private DataSource dataSource;
+
     private static final int DEFAULT_LIST_FOR_OUTPUT_IN_MAIN = 10;
 
     @Transactional
-    public void save(Order order) {
+    public void save(Order order) throws SQLException {
+        /*Connection connection = dataSource.getConnection();
+        PreparedStatement statementOne = connection.prepareStatement("set character set utf8");
+        PreparedStatement statementTwo = connection.prepareStatement("set names utf8");
+        statementOne.execute();
+        statementTwo.execute();
+        statementOne.close();
+        statementTwo.close();
+        connection.close();*/
+        RequestPostConnection.requestions(dataSource);
         orderRepository.save(order);
     }
 

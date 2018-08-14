@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.SQLException;
+
 @Controller
 @RequestMapping("/warspear")
 public class ProfileController {
@@ -31,13 +33,13 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/profile/submit")
-    public String profileSubmitSaving(@ModelAttribute User user) {
+    public String profileSubmitSaving(@ModelAttribute User user) throws SQLException {
         if (this.user == null) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             this.user = userService.findUserByName(authentication.getName());
         }
         this.user.update(user);
         userService.save(this.user);
-        return "profile";
+        return "redirect:../profile";
     }
 }

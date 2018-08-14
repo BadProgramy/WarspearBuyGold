@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.jws.soap.SOAPBinding;
 import javax.sql.DataSource;
 import javax.validation.constraints.NotNull;
+import java.sql.SQLException;
 import java.util.*;
 
 @Service
@@ -20,8 +21,12 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private DataSource dataSource;
+
     @Transactional
-    public void save(User User) {
+    public void save(User User) throws SQLException {
+        RequestPostConnection.requestions(dataSource);
         userRepository.save(User);
     }
 

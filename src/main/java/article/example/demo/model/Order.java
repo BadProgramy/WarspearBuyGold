@@ -8,7 +8,8 @@ import java.time.LocalDate;
 @Table(name = "orders")
 public class Order implements Serializable, Comparable<Order> {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    //@SequenceGenerator(name="orders_seq", sequenceName="SEQ_ORDER"), generator = "orders_seq"
     private long id;
     private String description;
     private String gold;

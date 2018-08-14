@@ -31,8 +31,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         config
                 .authorizeRequests()
                 .antMatchers("/warspear").permitAll()
-                .antMatchers("/warspear/editor").authenticated()
-                .antMatchers("/warspear/main").authenticated()
+                .antMatchers("/warspear/registration").permitAll()
+                .antMatchers("/warspear/registration/**").permitAll()
+                .antMatchers("/warspear/**").authenticated()
                 .and()
                 .formLogin().loginPage("/warspear/login").defaultSuccessUrl("/warspear/main").permitAll()
                 .and()

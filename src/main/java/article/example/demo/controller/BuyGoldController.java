@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 @Controller
@@ -42,7 +43,7 @@ public class BuyGoldController {
             this.user = userService.findUserByName(authentication.getName());
         }
         model.addAttribute("user", user);
-        return "buyGold";//отправить на страницу заказа
+        return "buyGold";
     }
 
 
@@ -59,7 +60,7 @@ public class BuyGoldController {
     }
 
     @RequestMapping(value = "/buyGoldGory/submit", method = RequestMethod.POST)
-    public String buyGoldAtGorySubmit(@ModelAttribute Order order, Model model) {
+    public String buyGoldAtGorySubmit(@ModelAttribute Order order, Model model) throws SQLException {
         if (this.user == null) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             this.user = userService.findUserByName(authentication.getName());
@@ -72,6 +73,6 @@ public class BuyGoldController {
         orderService.save(order);
         model.addAttribute("user",user);
         model.addAttribute("orders",orderService.getOrdersByUser(user));
-        return "order";//отправить на страницу заказа
+        return "redirect:../order";
     }
 }

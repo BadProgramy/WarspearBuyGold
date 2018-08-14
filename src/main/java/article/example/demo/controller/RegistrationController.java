@@ -23,7 +23,7 @@ public class RegistrationController {
 
 
     @RequestMapping("/registration/submit")
-    public String addUser(@ModelAttribute User user){
+    public String addUser(@ModelAttribute User user) throws SQLException {
         String encodePass = new BCryptPasswordEncoder().encode(user.getPassword());
         List<Role> roles = new ArrayList<>();
         roles.add(Role.USER);
@@ -34,7 +34,7 @@ public class RegistrationController {
     }
 
     @RequestMapping("/registration")
-    public String registrationPage(Model model) throws SQLException {
+    public String registrationPage(Model model) {
         model.addAttribute("user", new User());
         return "registration";
     }
