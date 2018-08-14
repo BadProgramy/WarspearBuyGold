@@ -44,9 +44,4 @@ public class FirstMainController {
             SecurityContextHolder.clearContext();
             return "firstMain";
     }
-
-    /*
-    public String exitSystem() {
-
-    }*/
 }
