@@ -91,9 +91,23 @@ public class RegistrationController {
         return "login";
     }
 
-    //@RequestMapping(value = "login/submit")
-    public String loginSubmit() {
-        //Тут уже заполнение шаблона secondMain
-        return "secondMain";
+
+    @RequestMapping("/registration/repeat/activation/{userId}")
+    public String repeatActivation(@PathVariable("userId") long userId) {
+        User user = userService.findUserById(userId);
+        try {
+            sender.send("Активация аккаунта",
+                    "Здравствуйте, это письмо пришло автоматически при регистрации аккаунта на Warspear Buy Gold." +
+                            "Ссылка для активации " +URL_Activation_For_Send_Mail + userId,
+                    user.getUsername());
+            return "redirect:../../activation";
+        } catch (Exception ex) {
+            userService.delete(user);
+            return "redirect:../registration/error";
+        }
+        catch (Error error) {
+            userService.delete(user);
+            return "redirect:../registration/error";
+        }
     }
 }

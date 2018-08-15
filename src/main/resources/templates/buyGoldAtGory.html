@@ -669,17 +669,17 @@
     <article>
         <header>
             <h1 class="header__title">Покупка голд: (RU-AMBER)</h1>
-            <h2>Количество голд для покупки у гор:</h2>
+            <h2>Колличество голд для покупки у гор:</h2>
             <h3 th:object="${outbid}" th:text="${outbid.goldForBuy}"></h3>
         </header>
         <section>
             <hr>
-            <h3 style="color: crimson">На вашу почту будут отправлены данные от аакаунта с укзанной голдой после проверки оплаты!</h3>
+            <h3 style="color: crimson">На вашу почту будут отправлены данные от акаунта с указанной голдой после проверки оплаты!</h3>
 
             <form th:action="@{/warspear/buyGoldGory/submit}" th:object="${order}" method="post">
                 <fieldset>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Количество голд:</span>
+                        <span class="input-group-addon" id="basic-addon1">Колличество голд:</span>
                         <input type="text" class="form-control" placeholder="0" aria-describedby="basic-addon1"
                                name="gold" th:field="*{gold}" id="gold" required="required"
                                oninput=multiplication()>

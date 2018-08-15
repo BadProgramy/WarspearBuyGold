@@ -73,6 +73,6 @@ public class BuyGoldController {
         orderService.save(order);
         model.addAttribute("user",user);
         model.addAttribute("orders",orderService.getOrdersByUser(user));
-        return "redirect:../order";
+        return "redirect:../orders";
     }
 }
