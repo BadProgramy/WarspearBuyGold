@@ -19,6 +19,8 @@ import java.util.List;
 @RequestMapping("/warspear")
 public class RegistrationController {
 
+    private User userNonActivation;
+
     private static final String URL_Activation_For_Send_Mail = "https://warspear-buy-gold.herokuapp.com/warspear/registration/activation/sendMail/userId/";
     private static final String URL_Controller = "registration/activation/sendMail/userId/{userId}";
 
@@ -41,10 +43,12 @@ public class RegistrationController {
             user.setPassword(encodePass);
             user.setEnabled(false);
             userService.save(user);
+            User userWriting = userService.findUserByName(user.getUsername());
             sender.send("Активация аккаунта",
                     "Здравствуйте, это письмо пришло автоматически при регистрации аккаунта на Warspear Buy Gold." +
-                            "Ссылка для активации " +URL_Activation_For_Send_Mail + userService.findUserByName(user.getUsername()).getId(),
+                            "Ссылка для активации " +URL_Activation_For_Send_Mail + userWriting.getId(),
                     user.getUsername());
+            userNonActivation = userWriting;
             return "redirect:../registration/activation";
         } catch (Exception ex) {
             userService.delete(user);
@@ -62,7 +66,8 @@ public class RegistrationController {
     }
 
     @RequestMapping("/registration/activation")
-    public String activationAccount() {
+    public String activationAccount(Model model) {
+        model.addAttribute("user",userNonActivation);
         return "sendMail";
     }
 
@@ -92,6 +97,11 @@ public class RegistrationController {
     }
 
 
+    @RequestMapping("/registration/repeat/activation")
+    public String repeatActivation() {
+        return "sendMail";
+    }
+
     @RequestMapping("/registration/repeat/activation/{userId}")
     public String repeatActivation(@PathVariable("userId") long userId) {
         User user = userService.findUserById(userId);
@@ -100,14 +110,14 @@ public class RegistrationController {
                     "Здравствуйте, это письмо пришло автоматически при регистрации аккаунта на Warspear Buy Gold." +
                             "Ссылка для активации " +URL_Activation_For_Send_Mail + userId,
                     user.getUsername());
-            return "redirect:../../activation";
+            return "redirect:../activation";
         } catch (Exception ex) {
             userService.delete(user);
-            return "redirect:../registration/error";
+            return "redirect:../../error";
         }
         catch (Error error) {
             userService.delete(user);
-            return "redirect:../registration/error";
+            return "redirect:../../error";
         }
     }
 }

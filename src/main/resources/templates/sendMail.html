@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function repeatSendingEmail() {
+            alert("Письмо отправлено повторно.")
+        }
+    </script>
+
     <style>
         .navbar {
             margin-bottom: 0;
@@ -57,7 +64,11 @@
                         <p>
                             На вашу почту было отправлено письмо со сcылкой для <b>активации аккаунта.</b><br/>
                             Без подтверждения вы не сможете войти в аккаунт.
-                            <a th:object="${user}" th:href="@{'/registration/repeat/activation/' + ${user.id}}" ></a>
+                            <div th:object="${user}">
+                                <div th:if="${user!=null}">
+                                    <a th:href="@{'redirect:../../warspear/registration/repeat/activation/' + ${user.id}}" onclick="repeatSendingEmail()">Отправить письмо заного</a>
+                                </div>
+                            </div>
                         </p>
                     </div>
                 </div>
