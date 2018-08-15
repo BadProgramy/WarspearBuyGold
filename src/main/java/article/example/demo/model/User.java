@@ -17,10 +17,10 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String username;//почта
     private String password;
-    private boolean accountNonExpired = true;
-    private boolean accountNonLocked = true;
-    private boolean credentialsNonExpired = true;
-    private boolean enabled = true;
+    private boolean accountNonExpired = true;//если давно не заходили
+    private boolean accountNonLocked = true;//если заблокированный
+    private boolean credentialsNonExpired = true; //если настройка учетных данных истекли
+    private boolean enabled = true;//активированный
 
     private String firstname;
     private String secondname;

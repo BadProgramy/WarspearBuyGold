@@ -69,4 +69,9 @@ public class UserService implements UserDetailsService {
         }
         return null;
     }
+
+    @Transactional
+    public User findUserById(@NotNull long id) {
+        return userRepository.findById(id).get();
+    }
 }
