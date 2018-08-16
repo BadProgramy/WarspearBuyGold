@@ -11,17 +11,28 @@
 
     <script>
         function multiplication() {
+            var goldForBuy = document.getElementById("goldForBuy").innerHTML;
             var cena= document.getElementById("gold");
             var itog= document.getElementById("itog");
             var orderClick = document.getElementById("orderClick");
 
-            if (Number(cena.value) >= 500) {
+            if (Number(cena.value) >= 500 && Number(cena.value)<=Number(goldForBuy)) {
                 itog.innerHTML = Number(cena.value) * 0.002 + "руб.";
                 orderClick.disabled = false;
             }
-            else {
+            else if (Number(cena.value) < 500) {
                     itog.innerHTML = "Такая маленькая сумма не обрабатывается. Минимальная сумма 500 голд";
                     orderClick.disabled = true;
+            }
+
+            else if (Number(cena.value)>Number(goldForBuy)) {
+                itog.innerHTML = "Указанная сумма превышает допустимую для покупки.";
+                orderClick.disabled = true;
+            }
+
+            else {
+                itog.innerHTML = "Вы ввели явно что то плохое :)";
+                orderClick.disabled = true;
             }
         }
     </script>
@@ -670,12 +681,13 @@
         <header>
             <h1 class="header__title">Покупка голд: (RU-AMBER)</h1>
             <h2>Колличество голд для покупки у гор:</h2>
-            <h3 th:object="${outbid}" th:text="${outbid.goldForBuy}"></h3>
+            <h3 style="color: chocolate" id = "goldForBuy" th:object="${outbid}" th:text="${outbid.goldForBuy}"></h3>
         </header>
         <section>
             <hr>
-            <h3 style="color: crimson">На вашу почту будут отправлены данные от акаунта с указанной голдой после проверки оплаты!</h3>
-
+<div th:switch="${isOrderProcessing}">
+    <div th:case="true">
+        <h3 style="color: crimson">На вашу почту будут отправлены данные от акаунта с указанной голдой после проверки оплаты!</h3>
             <form th:action="@{/warspear/buyGoldGory/submit}" th:object="${order}" method="post">
                 <fieldset>
                     <div class="input-group">
@@ -713,6 +725,11 @@
                     </div>
                 </fieldset>
             </form>
+    </div>
+    <div th:case="false">
+        <h3 style="color: crimson">К сожалению вы не сможете сделать больше 2ух заказов. Ждите статуса заказа 'ОБРАБОТАНО' или удалите свой заказ во вкладке 'Мои заказы'.</h3>
+    </div>
+</div>
         </section>
     </article>
 </main>

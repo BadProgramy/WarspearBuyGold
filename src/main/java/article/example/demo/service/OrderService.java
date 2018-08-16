@@ -61,6 +61,16 @@ public class OrderService {
         return orders;
     }
 
+    public boolean isOrderProcessing(User user) {
+        List<Order> orders = getOrdersByUser(user);
+        for (Order order: orders) {
+            if (order.getStatus().equals(Status.IDET_VYSTAVLENIE_SCHETA) ||
+                    order.getStatus().equals(Status.PROVERYETSY_OPLATA))
+                return false;
+        }
+        return true;
+    }
+
     public List<Order> getLastTenOrderInSorted(){
         List<Order> lastTenOrder = new ArrayList<>();
         for (Order order: getAll()) {

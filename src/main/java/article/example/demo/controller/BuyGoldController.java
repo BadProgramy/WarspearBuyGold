@@ -56,6 +56,7 @@ public class BuyGoldController {
         model.addAttribute("user", user);
         model.addAttribute("outbid",outbidService.getOutbid("Gory"));
         model.addAttribute("order", new Order());
+        model.addAttribute("isOrderProcessing",orderService.isOrderProcessing(user));
         return "buyGoldAtGory";
     }
 
@@ -65,12 +66,16 @@ public class BuyGoldController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             this.user = userService.findUserByName(authentication.getName());
         }
-        order.setDescription(String.valueOf(BUY_GOLD_GORY));
-        order.setStatus(Status.IDET_VYSTAVLENIE_SCHETA);
-        order.setDate(LocalDate.now());
-        order.setCost(String.valueOf(Double.valueOf(order.getGold())*MULTIPLICATION_GOLD));
-        order.setUser(user);
-        orderService.save(order);
+
+        if (orderService.isOrderProcessing(user)) {
+            order.setDescription(String.valueOf(BUY_GOLD_GORY));
+            order.setStatus(Status.IDET_VYSTAVLENIE_SCHETA);
+            order.setDate(LocalDate.now());
+            order.setCost(String.valueOf(Double.valueOf(order.getGold()) * MULTIPLICATION_GOLD));
+            order.setUser(user);
+            orderService.save(order);
+        }
+
         model.addAttribute("user",user);
         model.addAttribute("orders",orderService.getOrdersByUser(user));
         return "redirect:../orders";

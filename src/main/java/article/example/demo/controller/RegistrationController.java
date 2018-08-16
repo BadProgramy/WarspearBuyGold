@@ -3,6 +3,7 @@ package article.example.demo.controller;
 import article.example.demo.model.Role;
 import article.example.demo.model.User;
 import article.example.demo.service.UserService;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -50,7 +51,10 @@ public class RegistrationController {
                     user.getUsername());
             userNonActivation = userWriting;
             return "redirect:../registration/activation";
-        } catch (Exception ex) {
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+           return "redirect:../registration/error";
+        }
+        catch (Exception ex) {
             userService.delete(user);
             return "redirect:../registration/error";
         }
