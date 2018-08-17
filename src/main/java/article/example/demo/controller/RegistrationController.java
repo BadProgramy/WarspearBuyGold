@@ -22,7 +22,7 @@ public class RegistrationController {
 
     private User userNonActivation;
 
-    private static final String URL_Activation_For_Send_Mail = "https://warspear-buy-gold.herokuapp.com/warspear/registration/activation/sendMail/userId/";
+    private static final String URL_Activation_For_Send_Mail = "https://warspear.herokuapp.com/warspear/registration/activation/sendMail/userId/";
     private static final String URL_Controller = "registration/activation/sendMail/userId/{userId}";
 
 
