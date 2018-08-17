@@ -9,6 +9,34 @@
 
 <head>
 
+    <script>
+        function multiplication() {
+            var goldForBuyAtYxi = document.getElementById("goldForBuyAtYxi").innerHTML;
+            var cena= document.getElementById("gold");
+            var itog= document.getElementById("itog");
+            var orderClick = document.getElementById("orderClick");
+
+            if (Number(cena.value) >= 500 && Number(cena.value)<=Number(goldForBuyAtYxi)) {
+                itog.innerHTML = Number(cena.value) * 0.002 + "руб.";
+                orderClick.disabled = false;
+            }
+            else if (Number(cena.value) < 500) {
+                itog.innerHTML = "Такая маленькая сумма не обрабатывается. Минимальная сумма 500 голд";
+                orderClick.disabled = true;
+            }
+
+            else if (Number(cena.value)>Number(goldForBuyAtYxi)) {
+                itog.innerHTML = "Указанная сумма превышает допустимую для покупки.";
+                orderClick.disabled = true;
+            }
+
+            else {
+                itog.innerHTML = "Вы ввели явно что то плохое :)";
+                orderClick.disabled = true;
+            }
+        }
+    </script>
+
     <style>
         @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic);
 
@@ -546,10 +574,6 @@
             transition: width 0s ease;
         }
 
-        .input-group {
-            margin-bottom: 20px;
-        }
-
         input {
             width: 300px;
             font-size: 13px;
@@ -558,8 +582,6 @@
             background: #F6F6f6;
             border-radius: 8px;
         }
-
-
         /* фон затемнения на основной контент
          * при этом элементы блокируютя
          * спорная такая фича, если оно вам надо
@@ -657,40 +679,59 @@
 <main role="main">
     <article>
         <header>
-            <h1 class="header__title">Профиль:</h1>
-            <h2>Заполните данные о себе</h2>
+            <h1 class="header__title">Покупка голд: (RU-AMBER)</h1>
+            <h2>Колличество голд для покупки у ух:</h2>
+            <h3 style="color: chocolate" id = "goldForBuyAtYxi" th:object="${outbid}" th:text="${outbid.goldForBuy}"></h3>
         </header>
         <section>
             <hr>
-            <form th:action="@{/warspear/profile/submit}" th:object="${user}" method="post">
-                <fieldset>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Ваше имя:</span>
-                    <input type="text" class="form-control" placeholder="Иван" aria-describedby="basic-addon1"
-                           name="firstname" th:field="*{firstname}">
-                </div>
+            <div th:switch="${isOrderProcessing}">
+                <div th:case="true">
+                    <h3 style="color: crimson">На вашу почту будут отправлены данные от акаунта с указанной голдой после проверки оплаты!</h3>
+                    <form th:action="@{/warspear/buyGoldYxi/submit}" th:object="${order}" method="post">
+                        <fieldset>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Колличество голд:</span>
+                                <input type="text" class="form-control" placeholder="0" aria-describedby="basic-addon1"
+                                       name="gold" th:field="*{gold}" id="gold" required="required"
+                                       oninput=multiplication()>
+                            </div>
 
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2">Ваше фамилие:</span>
-                    <input type="text" class="form-control" placeholder="Иванов" aria-describedby="basic-addon1"
-                           name="secondname" th:field="*{secondname}">
-                </div>
+                            <br>
 
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon4">Ваша страницы в вконтакте:</span>
-                    <input type="text" class="form-control" placeholder="vk.com/id12345" aria-describedby="basic-addon1"
-                           name="pagevk" th:field="*{pagevk}">
-                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon2">Номер телефона для выставления счета в QIWI:</span>
+                                <input type="text" class="form-control" placeholder="+79371234567" aria-describedby="basic-addon1"
+                                       name="numberPhone" th:field="*{numberPhone}" required="required">
+                            </div>
 
-                <div>
-                    <button type="submit" class="btn btn-success"
-                            style="background: rebeccapurple;">Сохранить</button>
+                            <br>
+
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon3">Сообщение для администратора:</span>
+                                <input type="text" class="form-control" placeholder="Админ ты красава :)" aria-describedby="basic-addon1"
+                                       name="message" th:field="*{message}">
+                            </div>
+
+                            <br>
+
+                            ИТОГО: <b id="itog">0</b>
+
+                            <br>
+                            <br>
+                            <div style="margin-top: 20px">
+                                <button type="submit" class="btn btn-success" id="orderClick"
+                                        style="background: darkviolet">Заказать</button>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
-                </fieldset>
-            </form>
+                <div th:case="false">
+                    <h3 style="color: crimson">К сожалению вы не сможете сделать больше 2ух заказов. Ждите статуса заказа 'ОБРАБОТАНО' или удалите свой заказ во вкладке 'Мои заказы'.</h3>
+                </div>
+            </div>
         </section>
     </article>
 </main>
 </body>
-
 </html>
