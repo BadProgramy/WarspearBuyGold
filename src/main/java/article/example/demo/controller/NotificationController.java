@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -15,7 +16,7 @@ public class NotificationController {
     private Sender sender;
 
     @RequestMapping(value = "/notification", method = RequestMethod.POST)
-    public String notification(@RequestBody String notification_type
+    public String notification(HttpServletRequest request
                              /*@RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
@@ -26,7 +27,7 @@ public class NotificationController {
                              @RequestParam String currency,
                              @RequestParam Boolean codepro*/) {
         this.sender.send("Получилось",
-                notification_type + " \n", "myhytdinov@yandex.ru");
+                request.getParameter("notification_type") + " \n", "myhytdinov@yandex.ru");
      /*                   operation_id + " \n" +
         label + " \n" +
         datetime + " \n" +
