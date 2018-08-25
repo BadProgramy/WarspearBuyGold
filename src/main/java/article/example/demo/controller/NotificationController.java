@@ -24,8 +24,8 @@ public class NotificationController {
                              @RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
-                            /* @RequestParam Number amount,
-                             @RequestParam Number withdraw_amount,*/
+                             @RequestParam Number amount,
+                             /*@RequestParam Number withdraw_amount,*/
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
@@ -46,9 +46,9 @@ public class NotificationController {
         String key = "oy1lxrImQrIY2QLFiSVHljOy";
 
         String paramString =
-                notification_type + "&" + operation_id+ "&" + currency+ "&" + datetime
+                notification_type + "&" + operation_id+ "&" + amount + "&" + currency+ "&" + datetime
                         + "&" +sender+ "&" +
-                String.valueOf(codepro).toLowerCase()+ "&" + key+ "&" + label;
+                String.valueOf(codepro)+ "&" + key+ "&" + label;
 
         String paramStringHash1 = GetHash(paramString);
 
