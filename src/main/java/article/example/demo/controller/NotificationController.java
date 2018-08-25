@@ -15,8 +15,8 @@ public class NotificationController {
     @Autowired
     private Sender sender;
 
-    @RequestMapping(value = "/notification", method = RequestMethod.POST)
-    public String notification(/*@RequestParam("notification_type") String notification_type*/
+    @RequestMapping(value = "/notification", method = {RequestMethod.GET, RequestMethod.POST} )
+    public String notification(@RequestParam("notification_type") String notification_type
                              /*@RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
@@ -27,7 +27,7 @@ public class NotificationController {
                              @RequestParam String currency,
                              @RequestParam Boolean codepro*/) {
         this.sender.send("Получилось",
-                "хрень", "myhytdinov@yandex.ru");
+                notification_type, "myhytdinov@yandex.ru");
      /*                   operation_id + " \n" +
         label + " \n" +
         datetime + " \n" +
