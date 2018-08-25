@@ -21,7 +21,6 @@ public class NotificationController {
                              @RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
-                             @RequestParam String email,
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
@@ -31,8 +30,7 @@ public class NotificationController {
                 notification_type + " operation_id = " +
                         operation_id + " label = " +
         label + " datetime = " +
-        datetime + " email = " +
-        email + " sender = " +
+        datetime + " sender = " +
         sender + " sha1_hash = " +
         sha1_hash + " currency = " +
         currency + " codepro = " +
