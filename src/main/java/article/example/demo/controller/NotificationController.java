@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 @Controller
@@ -29,7 +30,7 @@ public class NotificationController {
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
                              @RequestParam boolean codepro
-    ) {
+    ) throws NoSuchAlgorithmException {
        /* this.sender.send("Получилось", "notification_type = "+
                 notification_type + " operation_id = " +
                         operation_id + " label = " +
@@ -68,22 +69,19 @@ public class NotificationController {
         return "notificationYM";
     }
 
-    public String GetHash(String base)
-    {
-        try{
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(base.getBytes("UTF-8"));
-            StringBuffer hexString = new StringBuffer();
+    public String GetHash(String base) throws NoSuchAlgorithmException {
 
-            for (int i = 0; i < hash.length; i++) {
-                String hex = Integer.toHexString(0xff & hash[i]);
-                if(hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
+        byte[] key = base.getBytes();
 
-            return hexString.toString();
-        } catch(Exception ex){
-            throw new RuntimeException(ex);
+        MessageDigest md = MessageDigest.getInstance("SHA-1");
+
+        byte[] hash = md.digest(key);
+
+        String result = "";
+        for (byte b : hash) {
+            result += Integer.toHexString(b & 255) + " ";
         }
+
+        return result;
     }
 }
