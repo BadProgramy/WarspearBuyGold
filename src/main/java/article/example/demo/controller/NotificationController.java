@@ -65,7 +65,7 @@ public class NotificationController {
         }
         else this.sender.send("Не получилось",
                 "paramStringHash1 = " + paramStringHash1 +
-        " sha1_hash = " + sha1_hash, "myhytdinov@yandex.ru");
+        " sha1_hash = " + sha1_hash + " paramString = " +paramString, "myhytdinov@yandex.ru");
         return "notificationYM";
     }
 
@@ -79,7 +79,7 @@ public class NotificationController {
 
         String result = "";
         for (byte b : hash) {
-            result += Integer.toHexString(b & 255) + " ";
+            result += Integer.toHexString(b + 256);
         }
 
         return result;
