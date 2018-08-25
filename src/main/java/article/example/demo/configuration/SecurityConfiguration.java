@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity config) throws Exception {
-        config
+        config.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/warspear").permitAll()
                 .antMatchers("/warspear/notification").permitAll()
@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/warspear/login").defaultSuccessUrl("/warspear/main").permitAll()
                 .and()
-                .logout().logoutUrl("/warspear/logout").permitAll().invalidateHttpSession(true).permitAll();;
+                .logout().logoutUrl("/warspear/logout").permitAll().invalidateHttpSession(true).permitAll();
     }
 
     @Autowired
