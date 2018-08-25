@@ -45,9 +45,10 @@ public class NotificationController {
 
         String key = "oy1lxrImQrIY2QLFiSVHljOy";
 
-        String paramString = String.format("{0}&{1}&{2}&{3}&{4}&{5}&{6}&{7}",
-                notification_type, operation_id, currency, datetime , sender,
-                String.valueOf(codepro).toLowerCase(), key, label);
+        String paramString =
+                notification_type + "&" + operation_id+ "&" + currency+ "&" + datetime
+                        + "&" +sender+ "&" +
+                String.valueOf(codepro).toLowerCase()+ "&" + key+ "&" + label;
 
         String paramStringHash1 = GetHash(paramString);
 
