@@ -80,7 +80,7 @@ public class NotificationController {
 
         String result = "";
         for (byte b : hash) {
-            result += Integer.toHexString(b + 256);
+            result += Integer.toHexString(b & 255);
         }
 
         return result;
