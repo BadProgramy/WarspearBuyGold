@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Map;
 
 @Controller
@@ -20,22 +21,22 @@ public class NotificationController {
                              @RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
-                             @RequestParam Float amount,
-                             @RequestParam Float withdraw_amount,
+                             @RequestParam BigDecimal amount,
+                             @RequestParam BigDecimal withdraw_amount,
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
-                             @RequestParam Boolean codepro) {
+                             @RequestParam boolean codepro) {
         this.sender.send("Получилось",
-                notification_type + " \n" +
-                        operation_id + " \n" +
-        label + " \n" +
-        datetime + " \n" +
-        String.valueOf(amount) + " \n" +
-        String.valueOf(withdraw_amount) + " \n" +
-        sender + " \n" +
-        sha1_hash + " \n" +
-        currency + " \n" +
+                notification_type + " " +
+                        operation_id + " " +
+        label + " " +
+        datetime + " " +
+        String.valueOf(amount) + " " +
+        String.valueOf(withdraw_amount) + " " +
+        sender + " " +
+        sha1_hash + " " +
+        currency + " " +
         codepro, "myhytdinov@yandex.ru");
         return "notificationYM";
     }
