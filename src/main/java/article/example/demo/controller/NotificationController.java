@@ -15,8 +15,8 @@ public class NotificationController {
     private Sender sender;
 
     @RequestMapping(value = "/notification", method = RequestMethod.POST)
-    public String notification(@RequestParam String notification_type,
-                             @RequestParam String operation_id,
+    public String notification(@RequestParam String notification_type
+                             /*@RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
                              @RequestParam Float amount,
@@ -24,10 +24,10 @@ public class NotificationController {
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
-                             @RequestParam Boolean codepro) {
+                             @RequestParam Boolean codepro*/) {
         this.sender.send("Получилось",
-                notification_type + " \n"+
-                        operation_id + " \n" +
+                notification_type + " \n", "myhytdinov@yandex.ru");
+     /*                   operation_id + " \n" +
         label + " \n" +
         datetime + " \n" +
         String.valueOf(amount) + " \n" +
@@ -35,7 +35,7 @@ public class NotificationController {
         sender + " \n" +
         sha1_hash + " \n" +
         currency + " \n" +
-        codepro, "myhytdinov@yandex.ru");
+        codepro, "myhytdinov@yandex.ru");*/
         return "notificationYM";
     }
 }
