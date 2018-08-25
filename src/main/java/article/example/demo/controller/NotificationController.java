@@ -25,8 +25,8 @@ public class NotificationController {
                              @RequestParam BigDecimal withdraw_amount,*/
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
-                             @RequestParam String currency
-                             //@RequestParam boolean codepro
+                             @RequestParam String currency,
+                             @RequestParam boolean codepro
     ) {
         this.sender.send("Получилось",
                 notification_type + " " +
@@ -37,8 +37,8 @@ public class NotificationController {
         String.valueOf(withdraw_amount) + " " +*/
         sender + " " +
         sha1_hash + " " +
-        currency + " " , "myhytdinov@yandex.ru");
-        //codepro, "myhytdinov@yandex.ru");
+        currency + " " +
+        codepro, "myhytdinov@yandex.ru");
         return "notificationYM";
     }
 }
