@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Map;
 
@@ -11,8 +12,9 @@ import java.util.Map;
 @RequestMapping("/warspear")
 public class NotificationController {
 
-    @RequestMapping("/notification")
-    public Map<String, Object> notification(@ModelAttribute JSONObject notification) {
-        return notification.toMap();
+    @RequestMapping(value = "/notification", method = RequestMethod.POST)
+    public String notification(String notification_type, String operation_id, String label, String datetime,
+                                            Float amount, Float withdraw_amount, String sender, String sha1_hash, String currency, Boolean codepro) {
+        return operation_id;
     }
 }
