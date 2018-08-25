@@ -21,23 +21,24 @@ public class NotificationController {
                              @RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
-                             @RequestParam BigDecimal amount,
-                             @RequestParam BigDecimal withdraw_amount,
+                             /*@RequestParam BigDecimal amount,
+                             @RequestParam BigDecimal withdraw_amount,*/
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
-                             @RequestParam String currency,
-                             @RequestParam boolean codepro) {
+                             @RequestParam String currency
+                             //@RequestParam boolean codepro
+    ) {
         this.sender.send("Получилось",
                 notification_type + " " +
                         operation_id + " " +
         label + " " +
         datetime + " " +
-        String.valueOf(amount) + " " +
-        String.valueOf(withdraw_amount) + " " +
+        /*String.valueOf(amount) + " " +
+        String.valueOf(withdraw_amount) + " " +*/
         sender + " " +
         sha1_hash + " " +
-        currency + " " +
-        codepro, "myhytdinov@yandex.ru");
+        currency + " " , "myhytdinov@yandex.ru");
+        //codepro, "myhytdinov@yandex.ru");
         return "notificationYM";
     }
 }
