@@ -21,23 +21,23 @@ public class NotificationController {
                              @RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
-                             @RequestParam double amount,
-                             @RequestParam double withdraw_amount,
+                             @RequestParam String amount,
+                             @RequestParam String withdraw_amount,
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
                              @RequestParam boolean codepro
     ) {
-        this.sender.send("Получилось",
-                notification_type + " " +
-                        operation_id + " " +
-        label + " " +
-        datetime + " " +
-        String.valueOf(amount) + " " +
-        String.valueOf(withdraw_amount) + " " +
-        sender + " " +
-        sha1_hash + " " +
-        currency + " " +
+        this.sender.send("Получилось", "notification_type = "+
+                notification_type + " operation_id = " +
+                        operation_id + " label = " +
+        label + " datetime = " +
+        datetime + " amount = " +
+        amount + " withdraw_amount = " +
+                withdraw_amount + " sender = " +
+        sender + " sha1_hash = " +
+        sha1_hash + " currency = " +
+        currency + " codepro = " +
         codepro, "myhytdinov@yandex.ru");
         return "notificationYM";
     }
