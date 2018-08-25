@@ -79,10 +79,16 @@ public class NotificationController {
         byte[] hash = md.digest(key);
 
         String result = "";
-        for (byte b : hash) {
+        /*for (byte b : hash) {
             result += Integer.toHexString(b & 255);
+        }*/
+        for (int i = 0; i < hash.length; i++)
+        {
+            String hex = Integer.toHexString(hash[i]);
+            if (hex.length() == 1) hex = "0" + hex;
+            hex = hex.substring(hex.length() - 2);
+            result += hex;
         }
-
         return result;
     }
 }
