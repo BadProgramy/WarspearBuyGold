@@ -15,7 +15,7 @@ public class NotificationController {
     private Sender sender;
 
     @RequestMapping(value = "/notification", method = RequestMethod.POST)
-    public void notification(@RequestParam String notification_type,
+    public String notification(@RequestParam String notification_type,
                              @RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
@@ -36,5 +36,6 @@ public class NotificationController {
         sha1_hash + " \n" +
         currency + " \n" +
         codepro, "myhytdinov@yandex.ru");
+        return "notificationYM";
     }
 }
