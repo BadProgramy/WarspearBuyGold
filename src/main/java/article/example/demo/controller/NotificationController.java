@@ -21,6 +21,8 @@ public class NotificationController {
                              @RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
+                             @RequestParam Number amount,
+                             @RequestParam Number withdraw_amount,
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
@@ -29,7 +31,9 @@ public class NotificationController {
         this.sender.send("Получилось", "notification_type = "+
                 notification_type + " operation_id = " +
                         operation_id + " label = " +
-        label + " datetime = " +
+        label + " amount = " +
+                amount + " withdraw_amount = " +
+                        withdraw_amount + " datetime = " +
         datetime + " sender = " +
         sender + " sha1_hash = " +
         sha1_hash + " currency = " +
