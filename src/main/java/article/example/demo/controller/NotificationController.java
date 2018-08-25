@@ -3,14 +3,11 @@ package article.example.demo.controller;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/warspear")
 public class NotificationController {
 
@@ -18,8 +15,16 @@ public class NotificationController {
     private Sender sender;
 
     @RequestMapping(value = "/notification", method = RequestMethod.POST)
-    public void notification(String notification_type, String operation_id, String label, String datetime,
-                                            Float amount, Float withdraw_amount, String sender, String sha1_hash, String currency, Boolean codepro) {
+    public void notification(@RequestParam String notification_type,
+                             @RequestParam String operation_id,
+                             @RequestParam String label,
+                             @RequestParam String datetime,
+                             @RequestParam Float amount,
+                             @RequestParam Float withdraw_amount,
+                             @RequestParam String sender,
+                             @RequestParam String sha1_hash,
+                             @RequestParam String currency,
+                             @RequestParam Boolean codepro) {
         this.sender.send("Получилось",
                 notification_type + " \n"+
                         operation_id + " \n" +
