@@ -33,8 +33,8 @@ public class NotificationController {
                         operation_id + " " +
         label + " " +
         datetime + " " +
-        /*String.valueOf(amount) + " " +
-        String.valueOf(withdraw_amount) + " " +*/
+        String.valueOf(amount) + " " +
+        String.valueOf(withdraw_amount) + " " +
         sender + " " +
         sha1_hash + " " +
         currency + " " +
