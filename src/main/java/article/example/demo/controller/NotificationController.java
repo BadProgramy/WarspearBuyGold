@@ -15,7 +15,7 @@ public class NotificationController {
     private Sender sender;
 
     @RequestMapping(value = "/notification", method = RequestMethod.POST)
-    public String notification(@RequestParam String notification_type
+    public String notification(@RequestBody String notification_type
                              /*@RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
