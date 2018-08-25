@@ -16,7 +16,7 @@ public class NotificationController {
     private Sender sender;
 
     @RequestMapping(value = "/notification", method = RequestMethod.POST)
-    public String notification(HttpServletRequest request
+    public String notification(@RequestParam("notification_type") String notification_type
                              /*@RequestParam String operation_id,
                              @RequestParam String label,
                              @RequestParam String datetime,
@@ -27,7 +27,7 @@ public class NotificationController {
                              @RequestParam String currency,
                              @RequestParam Boolean codepro*/) {
         this.sender.send("Получилось",
-                request.getParameter("notification_type") + " \n", "myhytdinov@yandex.ru");
+                notification_type, "myhytdinov@yandex.ru");
      /*                   operation_id + " \n" +
         label + " \n" +
         datetime + " \n" +
