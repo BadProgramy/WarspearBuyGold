@@ -29,19 +29,10 @@ public class NotificationController {
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
-                             @RequestParam boolean codepro
+                             @RequestParam boolean codepro,
+                               @RequestParam boolean unaccepted
+
     ) throws NoSuchAlgorithmException {
-       /* this.sender.send("Получилось", "notification_type = "+
-                notification_type + " operation_id = " +
-                        operation_id + " label = " +
-        label + " datetime = " +
-                *//*amount + " withdraw_amount = " +
-                        withdraw_amount + " datetime = " +*//*
-        datetime + " sender = " +
-        sender + " sha1_hash = " +
-        sha1_hash + " currency = " +
-        currency + " codepro = " +
-        codepro, "myhytdinov@yandex.ru");*/
 
         String key = "oy1lxrImQrIY2QLFiSVHljOy";
 
@@ -52,7 +43,7 @@ public class NotificationController {
 
         String paramStringHash1 = GetHash(paramString);
 
-        if (paramStringHash1.equals(sha1_hash))
+        if (paramStringHash1.equals(sha1_hash) && !codepro && !unaccepted)
         {
             this.sender.send("Получилось", "notification_type = "+
                     notification_type + " operation_id = " +
@@ -62,11 +53,19 @@ public class NotificationController {
                     sender + " sha1_hash = " +
                     sha1_hash + " currency = " +
                     currency + " codepro = " +
-                    codepro, "myhytdinov@yandex.ru");
+                    codepro + " unaccepted = " +
+                    unaccepted, "myhytdinov@yandex.ru");
         }
-        else this.sender.send("Не получилось",
-                "paramStringHash1 = " + paramStringHash1 +
-        " sha1_hash = " + sha1_hash + " paramString = " +paramString, "myhytdinov@yandex.ru");
+        else
+        {
+            this.sender.send("Не получилось",
+                    "paramStringHash1 = " + paramStringHash1 +
+                            " sha1_hash = " + sha1_hash + " paramString = " +paramString + " unaccepted = " + unaccepted
+                    + " codepro = " + codepro, "myhytdinov@yandex.ru");
+            this.sender.send("Не удалось проверить вашу оплату",
+                    "Что-то произошло не так напишите ему https://vk.com/id109488730 и он все проверит",
+                    "хз");
+        }
         return "notificationYM";
     }
 
@@ -79,9 +78,6 @@ public class NotificationController {
         byte[] hash = md.digest(key);
 
         String result = "";
-        /*for (byte b : hash) {
-            result += Integer.toHexString(b & 255);
-        }*/
         for (int i = 0; i < hash.length; i++)
         {
             String hex = Integer.toHexString(hash[i]);
