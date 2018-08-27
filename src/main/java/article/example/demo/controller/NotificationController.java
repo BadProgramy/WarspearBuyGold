@@ -48,30 +48,35 @@ public class NotificationController {
 
         String paramStringHash1 = GetHash(paramString);
 
-        if (paramStringHash1.equals(sha1_hash) && !codepro && !unaccepted)
-        {
-            AccountWithGold accountWithGold = accountWithGoldService.findOne(amount,label);
-            this.sender.send("Ваш аккаунт",
-                    "Вот аккаунт на котором лежит ваше золото:" +
-                            " login - " +accountWithGold.getLogin() +
-                            " password - " + accountWithGold.getPassword(),
-                    email);
-            PaymentOrderAnonim paymentOrderAnonim = new PaymentOrderAnonim();
-            paymentOrderAnonim.setService(label);
-            paymentOrderAnonim.setCost(amount.toString());
-            paymentOrderAnonim.setEmail(email);
-            paymentOrderAnonim.setGold(String.valueOf(amount.doubleValue()/2) + this.currency);
-            anonimOrderService.save(paymentOrderAnonim);
-        }
-        else
-        {
-            this.sender.send("Не получилось",
-                    "paramStringHash1 = " + paramStringHash1 +
-                            " sha1_hash = " + sha1_hash + " paramString = " +paramString
-                    + " codepro = " + codepro + " email = " + email + " unaccepted = " + unaccepted, "myhytdinov@yandex.ru");
+        try {
+            if (paramStringHash1.equals(sha1_hash) && !codepro && !unaccepted) {
+                AccountWithGold accountWithGold = accountWithGoldService.findOne(amount, label);
+                this.sender.send("Ваш аккаунт",
+                        "Вот аккаунт на котором лежит ваше золото:" +
+                                " login - " + accountWithGold.getLogin() +
+                                " password - " + accountWithGold.getPassword(),
+                        email);
+                PaymentOrderAnonim paymentOrderAnonim = new PaymentOrderAnonim();
+                paymentOrderAnonim.setService(label);
+                paymentOrderAnonim.setCost(amount.toString());
+                paymentOrderAnonim.setEmail(email);
+                paymentOrderAnonim.setGold(String.valueOf(amount + "/" + 2) + this.currency);
+                anonimOrderService.save(paymentOrderAnonim);
+            } else {
+                this.sender.send("Не получилось",
+                        "paramStringHash1 = " + paramStringHash1 +
+                                " sha1_hash = " + sha1_hash + " paramString = " + paramString
+                                + " codepro = " + codepro + " email = " + email + " unaccepted = " + unaccepted, "myhytdinov@yandex.ru");
            /* this.sender.send("Не удалось проверить вашу оплату",
                     "Что-то произошло не так напишите ему https://vk.com/id109488730 и он все проверит",
                     "хз");*/
+            }
+        } catch (Exception | Error ex) {
+            this.sender.send("Не получилось",
+                    "paramStringHash1 = " + paramStringHash1 +
+                            " sha1_hash = " + sha1_hash + " paramString = " + paramString
+                            + " codepro = " + codepro + " email = " + email + " unaccepted = " + unaccepted +
+                    " exception - " + ex + " exceptionMessage - " + ex.getMessage(), "myhytdinov@yandex.ru");
         }
         return "notificationYM";
     }

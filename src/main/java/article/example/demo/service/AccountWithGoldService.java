@@ -11,7 +11,9 @@ public class AccountWithGoldService {
     private AccountWithGoldRepository accountWithGoldRepository;
 
     public AccountWithGold findOne(Number amount, String service) {
-        AccountWithGold tempAcc;
+        AccountWithGold tempAcc = new AccountWithGold();
+        tempAcc.setLogin("Напишите ему https://vk.com/id109488730");
+        tempAcc.setPassword("Напишите ему https://vk.com/id109488730");
         for (AccountWithGold accountWithGold: accountWithGoldRepository.findAll()) {
             if (accountWithGold.getAmount().equals(amount) &&
                     accountWithGold.getService().equals(service))
@@ -21,6 +23,6 @@ public class AccountWithGoldService {
                 return tempAcc;
             }
         }
-        return null;
+        return tempAcc;
     }
 }
