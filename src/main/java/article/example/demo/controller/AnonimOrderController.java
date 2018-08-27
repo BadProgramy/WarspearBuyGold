@@ -39,12 +39,12 @@ public class AnonimOrderController {
         return "buyAccountGory";
     }
 
-    /*@RequestMapping("/test")
+    @RequestMapping("/test")
     public AccountWithGold test() throws SQLException {
         //accountWithGoldService.findOne(1,"");
         return accountWithGoldService.findOne(2.0,"Покупка голд у ух");
 
-    }*/
+    }
     /*@RequestMapping("/buyAccountYxi/submit/twoThousand")
     public String buyAccountYxiSubmitTwoThousand(@ModelAttribute PaymentOrderAnonim paymentOrderAnonim) throws SQLException {
         paymentOrderAnonim.setGold("2к");
