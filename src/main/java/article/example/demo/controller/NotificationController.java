@@ -55,7 +55,8 @@ public class NotificationController {
                         "Вот аккаунт на котором лежит ваше золото:" +
                                 " login - " + accountWithGold.getLogin() +
                                 " password - " + accountWithGold.getPassword() +
-                        " label - " + label,
+                                " amount + [" + amount.doubleValue() +
+                        "] label - [" + label + "]",
                         email);
                 PaymentOrderAnonim paymentOrderAnonim = new PaymentOrderAnonim();
                 paymentOrderAnonim.setService(label);
