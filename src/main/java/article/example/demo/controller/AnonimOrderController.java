@@ -28,7 +28,12 @@ public class AnonimOrderController {
         return "buyAccountYxi";
     }
 
-    @RequestMapping("/buyAccountYxi/submit/twoThousand")
+    @RequestMapping("/buyAccountGory")
+    public String buyAccountGory(Model model) {
+        model.addAttribute("paymentOrderAnonim", new PaymentOrderAnonim());
+        return "buyAccountGory";
+    }
+    /*@RequestMapping("/buyAccountYxi/submit/twoThousand")
     public String buyAccountYxiSubmitTwoThousand(@ModelAttribute PaymentOrderAnonim paymentOrderAnonim) throws SQLException {
         paymentOrderAnonim.setGold("2к");
         paymentOrderAnonim.setCost("4 руб.");
@@ -72,5 +77,5 @@ public class AnonimOrderController {
     public String payment(Model model) {
         model.addAttribute("paymentOrderAnonim", paymentOrderAnonim);
         return "formForPayment";
-    }
+    }*/
 }
