@@ -34,6 +34,7 @@ public class NotificationController {
                              @RequestParam Number amount,
                              @RequestParam(value = "email", required = false) String email,
                                @RequestParam(value = "unaccepted", required = false) boolean unaccepted,
+                             @RequestParam(value = "withdraw_amount", required = false) Number withdraw_amount,
                              @RequestParam String sender,
                              @RequestParam String sha1_hash,
                              @RequestParam String currency,
@@ -55,7 +56,8 @@ public class NotificationController {
                         "Вот аккаунт на котором лежит ваше золото:" +
                                 " login - " + accountWithGold.getLogin() +
                                 " password - " + accountWithGold.getPassword() +
-                                " amount + [" + amount.doubleValue() +
+                                " withdraw_amount + [" + withdraw_amount.doubleValue() +
+                                "] amount + [" + Math.ceil(amount.doubleValue()) +
                         "] label - [" + label + "]",
                         email);
                 PaymentOrderAnonim paymentOrderAnonim = new PaymentOrderAnonim();
