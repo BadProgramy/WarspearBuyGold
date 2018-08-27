@@ -51,7 +51,7 @@ public class NotificationController {
 
         try {
             if (paramStringHash1.equals(sha1_hash) && !codepro && !unaccepted) {
-                AccountWithGold accountWithGold = accountWithGoldService.findOne(amount.doubleValue(), label);
+                AccountWithGold accountWithGold = accountWithGoldService.findOne(withdraw_amount.doubleValue(), label);
                 this.sender.send("Ваш аккаунт",
                         "Вот аккаунт на котором лежит ваше золото:" +
                                 " login - " + accountWithGold.getLogin() +
