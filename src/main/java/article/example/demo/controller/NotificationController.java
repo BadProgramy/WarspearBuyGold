@@ -47,17 +47,17 @@ public class NotificationController {
                     sender + " sha1_hash = " +
                     sha1_hash + " currency = " +
                     currency + " codepro = " +
-                    codepro, "myhytdinov@yandex.ru");
+                    codepro + " email = " + email, "myhytdinov@yandex.ru");
         }
         else
         {
             this.sender.send("Не получилось",
                     "paramStringHash1 = " + paramStringHash1 +
                             " sha1_hash = " + sha1_hash + " paramString = " +paramString
-                    + " codepro = " + codepro, "myhytdinov@yandex.ru");
-            this.sender.send("Не удалось проверить вашу оплату",
+                    + " codepro = " + codepro + " email = " + email, "myhytdinov@yandex.ru");
+           /* this.sender.send("Не удалось проверить вашу оплату",
                     "Что-то произошло не так напишите ему https://vk.com/id109488730 и он все проверит",
-                    "хз");
+                    "хз");*/
         }
         return "notificationYM";
     }
