@@ -34,6 +34,7 @@ public class AccountWithGoldService {
             tempAcc.setGold(resultSet.getString("gold"));
             tempAcc.setAmount(resultSet.getDouble("amount"));
             tempAcc.setService(resultSet.getString("service"));
+            accountWithGoldRepository.deleteById(tempAcc.getId());
         }
         return tempAcc;
     }

@@ -98,7 +98,7 @@
             display: inline-block;
             width: 300px;
             text-align: center;
-            margin: 0 auto;
+            margin: 10px;
             border-bottom: 2px solid #F5F5F5;
             background: white;
             font-family: "Open Sans";
@@ -110,7 +110,7 @@
             width: 100%;
         }
         .product-list {
-            background: #fafafa;
+            background: #d2d2d2;
             padding: 15px 0;
         }
         .product-list h3 {
@@ -125,18 +125,34 @@
             display: block;
             margin-bottom: 12px;
         }
-        .button {
-            text-decoration: none;
-            display: inline-block;
-            padding: 0 12px;
-            background: #cccccc;
-            color: white;
-            text-transform: uppercase;
-            font-size: 12px;
-            line-height: 28px;
-            transition: .3s ease-in;
+
+
+        label input[type="radio"] {
+            display: none;
         }
-        .product-item:hover .button {background: #fc5a5a;}
+        label input[type="radio"] ~ span {
+            position: relative;
+            display: inline-block;
+            padding: 3px 0 3px 25px;
+        }
+        label input[type="radio"] ~ span:before {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            box-sizing: border-box;
+            transition: all 300ms ease-in-out;
+        }
+        label input[type="radio"]:checked ~ span:before {
+            border: 5px solid #29d;
+        }
     </style>
     <title>Warspear Buy Gold</title>
 </head>
@@ -178,7 +194,7 @@
             </div>
 
             <div class="product-item">
-                <img src="http://v-2017-godu.ru/wp-content/uploads/2016/03/46.3.jpg">
+                <img src="http://copycoins.ru/d/kopiya_zolotoy_monety_4000_reys_1824_god_braziliya.jpg">
                 <div class="product-list">
                     <h3>1к голд</h3>
                     <span class="price">2₽</span>
@@ -195,11 +211,11 @@
                         <input type="hidden" name="need-email" value="true">
                         <input type="hidden" name="need-phone" value="false">
                         <input type="hidden" name="need-address" value="false">
-                        <label><input type="radio" name="paymentType" value="PC">Яндекс деньгами</label>
+                        <label><input type="radio" name="paymentType" value="PC"><span>Яндекс деньгами</span></label>
                         <br>
-                        <label><input type="radio" name="paymentType" value="AC">Банковской картой</label>
+                        <label><input type="radio" name="paymentType" value="AC"><span>Банковской картой</span></label>
                         <br>
-                        <input type="submit" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        <input type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
                     </form>
                     <!--<form action="/warspear/buyAccountYxi/submit/twoThousand" class="form"
                           th:object="${paymentOrderAnonim}">
@@ -210,7 +226,7 @@
             </div>
 
             <div class="product-item">
-                <img src="http://v-2017-godu.ru/wp-content/uploads/2016/03/46.3.jpg">
+                <img src="https://imgp.golos.io/0x0/http://www.nat-geo.ru/upload/iblock/f24/f249ddbe3e65b13756e8ca52f45af304.jpg">
                 <div class="product-list">
                     <h3>10к голд</h3>
                     <span class="price">20₽</span>
@@ -227,11 +243,11 @@
                         <input type="hidden" name="need-email" value="true">
                         <input type="hidden" name="need-phone" value="false">
                         <input type="hidden" name="need-address" value="false">
-                        <label><input type="radio" name="paymentType" value="PC">Яндекс деньгами</label>
+                        <label><input type="radio" name="paymentType" value="PC"><span>Яндекс деньгами</span></label>
                         <br>
-                        <label><input type="radio" name="paymentType" value="AC">Банковской картой</label>
+                        <label><input type="radio" name="paymentType" value="AC"><span>Банковской картой</span></label>
                         <br>
-                        <input type="submit" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        <input type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
                     </form>
                     <!--<form action="/warspear/buyAccountYxi/submit/tenThousand" class="form"
                           th:object="${paymentOrderAnonim}">
@@ -242,7 +258,7 @@
             </div>
 
             <div class="product-item">
-                <img src="http://v-2017-godu.ru/wp-content/uploads/2016/03/46.3.jpg">
+                <img src="http://www.999gold.ru/img/news/logo/2bc0b0e971a36ae419634c8c979d98f7.jpg">
                 <div class="product-list">
                     <h3>50к голд</h3>
                     <span class="price">100₽</span>
@@ -259,11 +275,11 @@
                         <input type="hidden" name="need-email" value="true">
                         <input type="hidden" name="need-phone" value="false">
                         <input type="hidden" name="need-address" value="false">
-                        <label><input type="radio" name="paymentType" value="PC">Яндекс деньгами</label>
+                        <label><input type="radio" name="paymentType" value="PC"><span>Яндекс деньгами</span></label>
                         <br>
-                        <label><input type="radio" name="paymentType" value="AC">Банковской картой</label>
+                        <label><input type="radio" name="paymentType" value="AC"><span>Банковской картой</span></label>
                         <br>
-                        <input type="submit" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        <input type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
                     </form>
                     <!--<form action="/warspear/buyAccountYxi/submit/fiftyThousand" class="form"
                           th:object="${paymentOrderAnonim}">
@@ -291,11 +307,11 @@
                         <input type="hidden" name="need-email" value="true">
                         <input type="hidden" name="need-phone" value="false">
                         <input type="hidden" name="need-address" value="false">
-                        <label><input type="radio" name="paymentType" value="PC">Яндекс деньгами</label>
+                        <label><input type="radio" name="paymentType" value="PC"><span>Яндекс деньгами</span></label>
                         <br>
-                        <label><input type="radio" name="paymentType" value="AC">Банковской картой</label>
+                        <label><input type="radio" name="paymentType" value="AC"><span>Банковской картой</span></label>
                         <br>
-                        <input type="submit" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        <input type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
                     </form>
                     <!--<form action="/warspear/buyAccountYxi/submit/hundredThousand" class="form"
                           th:object="${paymentOrderAnonim}">
