@@ -1,6 +1,8 @@
 package article.example.demo.controller;
 
+import article.example.demo.model.AccountWithGold;
 import article.example.demo.model.PaymentOrderAnonim;
+import article.example.demo.service.AccountWithGoldService;
 import article.example.demo.service.AnonimOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class AnonimOrderController {
     @Autowired
     private AnonimOrderService anonimOrderService;
 
+    @Autowired
+    private AccountWithGoldService accountWithGoldService;
+
     private PaymentOrderAnonim paymentOrderAnonim;
 
     @RequestMapping("/buyAccountYxi")
@@ -33,6 +38,13 @@ public class AnonimOrderController {
         model.addAttribute("paymentOrderAnonim", new PaymentOrderAnonim());
         return "buyAccountGory";
     }
+
+    /*@RequestMapping("/test")
+    public AccountWithGold test() throws SQLException {
+        //accountWithGoldService.findOne(1,"");
+        return accountWithGoldService.findOne(2.0,"Покупка голд у ух");
+
+    }*/
     /*@RequestMapping("/buyAccountYxi/submit/twoThousand")
     public String buyAccountYxiSubmitTwoThousand(@ModelAttribute PaymentOrderAnonim paymentOrderAnonim) throws SQLException {
         paymentOrderAnonim.setGold("2к");

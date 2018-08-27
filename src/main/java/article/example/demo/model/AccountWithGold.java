@@ -12,7 +12,7 @@ public class AccountWithGold implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String gold;
-    private Number amount;
+    private Double amount;
     private String service;
     private String login;
     private String password;
@@ -49,11 +49,11 @@ public class AccountWithGold implements Serializable {
         this.gold = gold;
     }
 
-    public Number getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Number amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
