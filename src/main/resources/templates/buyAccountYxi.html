@@ -50,8 +50,6 @@
             text-shadow: 0 100px 0 #FFF,1px 76px 10px #000;
             color: #FFF;
             background: #5D8EC7;
-            border-right: 2px solid #FFF;
-            border-left: 2px solid #FFF;
             -webkit-transition: all 0.3s ease-in-out;
             -moz-transition: all 0.3s ease-in-out;
             -o-transition: all 0.3s ease-in-out;
@@ -79,8 +77,6 @@
             text-shadow: 0 100px 0 #FFF,1px 76px 10px #000;
             color: #FFF;
             background: #5D8EC7;
-            border-right: 2px solid #FFF;
-            border-left: 2px solid #FFF;
             -webkit-transition: all 0.3s ease-in-out;
             -moz-transition: all 0.3s ease-in-out;
             -o-transition: all 0.3s ease-in-out;
@@ -153,10 +149,18 @@
         label input[type="radio"]:checked ~ span:before {
             border: 5px solid #29d;
         }
+
+        footer {
+            width: 100%;
+            float: left;
+            margin: 20px 0 0;
+            padding: 30px 0;
+            background: #333;
+        }
     </style>
     <title>Warspear Buy Gold</title>
 </head>
-<body>
+<body style="background: #a8b773">
 
 
 <nav class="navbar navbar-inverse">
@@ -178,11 +182,16 @@
     <div class="row content">
         <div class="col-sm-8 text-left" style = "width : 100%;">
             <div>
-                <div class="well">
+                <div class="well" style="background: #bbefdd; border: 0px">
                     <div class="panel-body">
-                        <h1>Выберите аккаунт</h1>
-                        <p style="color: #e00000">
+                        <h1>Выберите фракцию и услугу</h1>
+                        <p style="color: rgba(1,0,0,0.96)">
                             На ваш email будут отправлены данные от аккаунта с голдой. Вводить почту будете при оплате на Яндекс Деньги.
+                            Заказать другую доступную сумму голд можно только в личном кабинете или обратившись мне вк (ссылка на страницу внизу), но там работае в ручном режиме т.е я сам обрабатываю заявку, надо будет подождать.
+                            Но на этой странице вы можете преобрести моментально за 20 сек так как здесь режим автоматический. Данные от аккаунта присылаются в течении одной минуты.
+                        </p>
+                        <p style="color: #e00000; font-size: 25px">
+                            Внимание: Если не доступна кнопка купить, значит аккаунты закончились, подождите когда администратор добавит аккаунты и снова заработает кнопка.
                         </p>
                     </div>
                 </div>
@@ -197,7 +206,7 @@
                 <div class="product-list">
                     <h3>1к голд</h3>
                     <span class="price">2₽</span>
-                    <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                    <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml" th:object="${isEmptyTwoKInYxi}">
                         <input type="hidden" name="receiver" value="41001818975938">
                         <input type="hidden" name="formcomment" value="Покупка голд у ух">
                         <input type="hidden" name="short-dest" value="Покупка голд у ух">
@@ -214,7 +223,10 @@
                         <br>
                         <label><input type="radio" name="paymentType" value="AC"><span>Банковской картой</span></label>
                         <br>
-                        <input type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        <div th:switch="${isEmptyTwoKInYxi}">
+                            <input th:case="false" type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                            <input th:case="true" disabled type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        </div>
                     </form>
                     <!--<form action="/warspear/buyAccountYxi/submit/twoThousand" class="form"
                           th:object="${paymentOrderAnonim}">
@@ -246,7 +258,10 @@
                         <br>
                         <label><input type="radio" name="paymentType" value="AC"><span>Банковской картой</span></label>
                         <br>
-                        <input type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        <div th:switch="${isEmptyTenKInYxi}">
+                            <input th:case="false" type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                            <input th:case="true" disabled type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        </div>
                     </form>
                     <!--<form action="/warspear/buyAccountYxi/submit/tenThousand" class="form"
                           th:object="${paymentOrderAnonim}">
@@ -278,7 +293,10 @@
                         <br>
                         <label><input type="radio" name="paymentType" value="AC"><span>Банковской картой</span></label>
                         <br>
-                        <input type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        <div th:switch="${isEmptyFiftyKInYxi}">
+                            <input th:case="false" type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                            <input th:case="true" disabled type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        </div>
                     </form>
                     <!--<form action="/warspear/buyAccountYxi/submit/fiftyThousand" class="form"
                           th:object="${paymentOrderAnonim}">
@@ -310,7 +328,10 @@
                         <br>
                         <label><input type="radio" name="paymentType" value="AC"><span>Банковской картой</span></label>
                         <br>
-                        <input type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        <div th:switch="${isEmptyHundredKInYxi}">
+                            <input th:case="false" type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                            <input th:case="true" disabled type="submit" style="background: #7bda17b5; border: 4px solid transparent; border-radius: 10px" class="btn btn--primary btn--inside uppercase" value="Купить">
+                        </div>
                     </form>
                     <!--<form action="/warspear/buyAccountYxi/submit/hundredThousand" class="form"
                           th:object="${paymentOrderAnonim}">
@@ -322,5 +343,15 @@
         </div>
     </div>
 </div>
+
+<footer>
+    <div class='container'>
+
+        <div class='eight columns'>
+            <h5>Сайт для покупки аккаунта с голдой</h5>
+            <p>Сайт разработан для покупки голд. По любым вопросам обращайтесь к администратору https://vk.com/id109488730. Голд чистый, нафармленный в лабе! Также можете купить этот голд у администратора в вк. Этот сайт работает в автоматическом режиме, как только вы оплачиваете одну из выбранных услуг вам моментально на почту отсылается данные от акк. Что то произошло не так, обращайтесь к администратору, я все верну.</p>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

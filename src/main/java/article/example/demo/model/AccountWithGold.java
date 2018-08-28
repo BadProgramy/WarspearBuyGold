@@ -17,6 +17,23 @@ public class AccountWithGold implements Serializable {
     private String login;
     private String password;
 
+    public AccountWithGold() {
+    }
+
+    public AccountWithGold(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    public AccountWithGold(AccountWithGold accountWithGold) {
+        this.id = accountWithGold.getId();
+        this.gold = accountWithGold.getGold();
+        this.amount = accountWithGold.getAmount();
+        this.service = accountWithGold.getService();
+        this.login = accountWithGold.getLogin();
+        this.password = accountWithGold.getPassword();
+    }
+
     public long getId() {
         return id;
     }
@@ -63,5 +80,21 @@ public class AccountWithGold implements Serializable {
 
     public void setService(String service) {
         this.service = service;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new AccountWithGold(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (this.getClass()!=obj.getClass()) return false;
+        if (obj==null) return false;
+
+        AccountWithGold object = (AccountWithGold)obj;
+        return (this.getLogin().equals(object.getLogin()) &&
+                this.getPassword().equals(object.getPassword()));
     }
 }

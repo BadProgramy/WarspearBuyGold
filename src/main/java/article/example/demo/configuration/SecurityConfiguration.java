@@ -33,6 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/warspear").permitAll()
                 .antMatchers("/warspear/buyAccountYxi").permitAll()
                 .antMatchers("/warspear/buyAccountYxi/**").permitAll()
+                .antMatchers("/warspear/buyAccountGory").permitAll()
+                .antMatchers("/warspear/buyAccountGory/**").permitAll()
                 .antMatchers("/warspear/payment").permitAll()
                 .antMatchers("/warspear/notification").permitAll()
                 .antMatchers("/warspear/registration").permitAll()

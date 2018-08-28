@@ -1,5 +1,6 @@
 package article.example.demo.service;
 
+import article.example.demo.constante.Const;
 import article.example.demo.dao.AccountWithGoldRepository;
 import article.example.demo.model.AccountWithGold;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,8 @@ public class AccountWithGoldService {
     @Autowired
     private DataSource dataSource;
 
-    public AccountWithGold findOne(Double amount, String service) throws SQLException {
-        AccountWithGold tempAcc = new AccountWithGold();
-        tempAcc.setLogin("Обратитесь ему, так как у вас возникла ошибка: https://vk.com/id109488730");
-        tempAcc.setPassword("Обратитесь ему, так как у вас возникла ошибка: https://vk.com/id109488730");
-
+    public AccountWithGold findOne(Double amount, String service) throws SQLException, CloneNotSupportedException {
+        AccountWithGold tempAcc = (AccountWithGold) Const.accountWithGoldIsEmpty.clone();
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from account_with_gold where amount = ? and service = ?");
         preparedStatement.setDouble(1, amount);
@@ -34,8 +32,15 @@ public class AccountWithGoldService {
             tempAcc.setGold(resultSet.getString("gold"));
             tempAcc.setAmount(resultSet.getDouble("amount"));
             tempAcc.setService(resultSet.getString("service"));
-            accountWithGoldRepository.deleteById(tempAcc.getId());
+
         }
+        resultSet.close();
+        preparedStatement.close();
+        connection.close();
         return tempAcc;
+    }
+
+    public void delete(long id) {
+        accountWithGoldRepository.deleteById(id);
     }
 }
