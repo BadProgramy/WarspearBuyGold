@@ -31,9 +31,9 @@ public class FirstMainController {
 
 
     @RequestMapping
-    public String mainPage(Model model) {
-        model.addAttribute("orders", service.getLastTenOrderInSorted());
-        return "firstMain";
+    public String mainPage() {
+       // model.addAttribute("orders", service.getLastTenOrderInSorted());
+        return "redirect:/warspear/buyAccountYxi";
     }
 
     @RequestMapping("warspear/logout")
@@ -45,6 +45,6 @@ public class FirstMainController {
             }
 
             SecurityContextHolder.clearContext();
-            return "firstMain";
+            return "redirect:../warspear/buyAccountYxi";
     }
 }
