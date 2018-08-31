@@ -29,8 +29,8 @@ public class AnonimOrderController {
     public String buyAccountYxi(Model model) throws SQLException, CloneNotSupportedException {
         model.addAttribute("paymentOrderAnonim", new PaymentOrderAnonim());
 
-        if (accountWithGoldService.findOne(2.0,"Покупка голд у ух").getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
-                accountWithGoldService.findOne(2.0,"Покупка голд у ух").getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
+        if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
+                accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
             model.addAttribute("isEmptyTwoKInYxi", true);
         else model.addAttribute("isEmptyTwoKInYxi", false);
 
