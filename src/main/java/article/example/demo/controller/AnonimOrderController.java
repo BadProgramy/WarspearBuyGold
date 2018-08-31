@@ -31,12 +31,12 @@ public class AnonimOrderController {
 
         if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
-            model.addAttribute("isEmptyTwoKInYxi", false);
+            model.addAttribute("isEmptyTwoKInYxi", true);
         else model.addAttribute("isEmptyTwoKInYxi", false);
 
         if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTenK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInTenK,Const.serviceBuyGoldByYxi).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
-            model.addAttribute("isEmptyTenKInYxi", false);
+            model.addAttribute("isEmptyTenKInYxi", true);
         else model.addAttribute("isEmptyTenKInYxi", false);
 
         if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInFiftyK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&

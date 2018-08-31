@@ -18,7 +18,8 @@ public class AccountWithGoldService {
     private DataSource dataSource;
 
     public AccountWithGold findOne(Double amount, String service) throws SQLException, CloneNotSupportedException {
-        AccountWithGold tempAcc = (AccountWithGold) Const.accountWithGoldIsEmpty.clone();
+        AccountWithGold tempAcc = new AccountWithGold(Const.accountWithGoldIsEmpty.getLogin(),
+                Const.accountWithGoldIsEmpty.getPassword());
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from account_with_gold where amount = ? and service = ?");
         preparedStatement.setDouble(1, amount);
