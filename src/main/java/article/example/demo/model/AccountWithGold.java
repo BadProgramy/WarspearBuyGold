@@ -16,11 +16,9 @@ public class AccountWithGold implements Serializable {
     private String service;
     private String login;
     private String password;
-    private boolean sending;
     private String operationId;
 
     public AccountWithGold() {
-        sending = false;
     }
 
     public AccountWithGold(String login, String password) {
@@ -83,14 +81,6 @@ public class AccountWithGold implements Serializable {
 
     public void setService(String service) {
         this.service = service;
-    }
-
-    public boolean isSending() {
-        return sending;
-    }
-
-    public void setSending(boolean sending) {
-        this.sending = sending;
     }
 
     public String getOperationId() {
