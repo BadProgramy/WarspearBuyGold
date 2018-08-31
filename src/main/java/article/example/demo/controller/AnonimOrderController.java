@@ -29,7 +29,7 @@ public class AnonimOrderController {
     public String buyAccountYxi(Model model) throws SQLException, CloneNotSupportedException {
         model.addAttribute("paymentOrderAnonim", new PaymentOrderAnonim());
 
-        if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
+        /*if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
             model.addAttribute("isEmptyTwoKInYxi", true);
         else model.addAttribute("isEmptyTwoKInYxi", false);
@@ -47,7 +47,13 @@ public class AnonimOrderController {
         if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInHundredK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInHundredK,Const.serviceBuyGoldByYxi).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
             model.addAttribute("isEmptyHundredKInYxi", true);
-        else model.addAttribute("isEmptyHundredKInYxi", false);
+        else model.addAttribute("isEmptyHundredKInYxi", false);*/
+
+        model.addAttribute("isEmptyTwoKInYxi", accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).equals(Const.accountWithGoldIsEmpty));
+        model.addAttribute("isEmptyTenKInYxi", accountWithGoldService.findOne(Const.amountInAccountForPaymentInTenK,Const.serviceBuyGoldByYxi).equals(Const.accountWithGoldIsEmpty));
+        model.addAttribute("isEmptyFiftyKInYxi", accountWithGoldService.findOne(Const.amountInAccountForPaymentInFiftyK,Const.serviceBuyGoldByYxi).equals(Const.accountWithGoldIsEmpty));
+        model.addAttribute("isEmptyHundredKInYxi", accountWithGoldService.findOne(Const.amountInAccountForPaymentInHundredK,Const.serviceBuyGoldByYxi).equals(Const.accountWithGoldIsEmpty));
+
 
         //model.addAttribute("isEmptyHundredKInYxi", accountWithGoldService.findOne(Const.amountInAccountForPaymentInHundredK,Const.serviceBuyGoldByYxi).equals(Const.accountWithGoldIsEmpty));
 
@@ -59,7 +65,7 @@ public class AnonimOrderController {
         model.addAttribute("paymentOrderAnonim", new PaymentOrderAnonim());
 
 
-        if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByGory).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
+        /*if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByGory).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByGory).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
             model.addAttribute("isEmptyTwoKInGory", true);
         else model.addAttribute("isEmptyTwoKInGory", false);
@@ -77,13 +83,12 @@ public class AnonimOrderController {
         if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInHundredK,Const.serviceBuyGoldByGory).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInHundredK,Const.serviceBuyGoldByGory).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
             model.addAttribute("isEmptyHundredKInGory", true);
-        else model.addAttribute("isEmptyHundredKInGory", false);
+        else model.addAttribute("isEmptyHundredKInGory", false);*/
 
-        /*model.addAttribute("isEmptyTwoKInGory", accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByGory).equals(Const.accountWithGoldIsEmpty));
+        model.addAttribute("isEmptyTwoKInGory", accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByGory).equals(Const.accountWithGoldIsEmpty));
         model.addAttribute("isEmptyTenKInGory", accountWithGoldService.findOne(Const.amountInAccountForPaymentInTenK,Const.serviceBuyGoldByGory).equals(Const.accountWithGoldIsEmpty));
         model.addAttribute("isEmptyFiftyKInGory", accountWithGoldService.findOne(Const.amountInAccountForPaymentInFiftyK,Const.serviceBuyGoldByGory).equals(Const.accountWithGoldIsEmpty));
         model.addAttribute("isEmptyHundredKInGory", accountWithGoldService.findOne(Const.amountInAccountForPaymentInHundredK,Const.serviceBuyGoldByGory).equals(Const.accountWithGoldIsEmpty));
-*/
         return "buyAccountGory";
     }
 
