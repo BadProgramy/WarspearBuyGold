@@ -9,10 +9,10 @@ public abstract class Const {
    public static final String goldInAccountForPaymentInTenK= "10к";
    public static final String goldInAccountForPaymentInFifty = "50к";
    public static final String goldInAccountForPaymentInHundred = "100к";
-   public static final double amountInAccountForPaymentInTwoK = Double.valueOf(2);
-   public static final double amountInAccountForPaymentInTenK = Double.valueOf(20);
-   public static final double amountInAccountForPaymentInFiftyK = Double.valueOf(100);
-   public static final double amountInAccountForPaymentInHundredK = Double.valueOf(200);
+   public static final double amountInAccountForPaymentInTwoK = 2.0;
+   public static final double amountInAccountForPaymentInTenK = 20.0;
+   public static final double amountInAccountForPaymentInFiftyK = 100.0;
+   public static final double amountInAccountForPaymentInHundredK = 200.0;
 
     public static final AccountWithGold accountWithGoldIsEmpty = new AccountWithGold("Обратитесь ему, так как у вас возникла ошибка: https://vk.com/id109488730",
             "Обратитесь ему, так как у вас возникла ошибка: https://vk.com/id109488730");

