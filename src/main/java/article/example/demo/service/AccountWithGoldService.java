@@ -56,7 +56,8 @@ public class AccountWithGoldService {
         accountWithGoldRepository.deleteById(id);
     }
 
-    public void save(AccountWithGold accountWithGold) {
+    public void save(AccountWithGold accountWithGold) throws SQLException {
+        RequestPostConnection.requestions(dataSource);
         accountWithGoldRepository.save(accountWithGold);
     }
 
