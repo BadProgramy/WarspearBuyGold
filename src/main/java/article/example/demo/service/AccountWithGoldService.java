@@ -62,7 +62,7 @@ public class AccountWithGoldService {
 
     public AccountWithGold findAccountByOperationId(String operationId) {
         for (AccountWithGold accountWithGold: accountWithGoldRepository.findAll()) {
-            if (accountWithGold.getOperationId().equals(operationId)) return accountWithGold;
+            if (accountWithGold.getOperationId()==operationId) return accountWithGold;
         }
         return null;
     }
