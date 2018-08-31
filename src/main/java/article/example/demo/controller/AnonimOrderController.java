@@ -31,13 +31,13 @@ public class AnonimOrderController {
 
         if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInTwoK,Const.serviceBuyGoldByYxi).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
-            model.addAttribute("isEmptyTwoKInYxi", true);
-        else model.addAttribute("isEmptyTwoKInYxi", true);
+            model.addAttribute("isEmptyTwoKInYxi", false);
+        else model.addAttribute("isEmptyTwoKInYxi", false);
 
         if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInTenK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInTenK,Const.serviceBuyGoldByYxi).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
-            model.addAttribute("isEmptyTenKInYxi", true);
-        else model.addAttribute("isEmptyTenKInYxi", true);
+            model.addAttribute("isEmptyTenKInYxi", false);
+        else model.addAttribute("isEmptyTenKInYxi", false);
 
         if (accountWithGoldService.findOne(Const.amountInAccountForPaymentInFiftyK,Const.serviceBuyGoldByYxi).getLogin().equals(Const.accountWithGoldIsEmpty.getLogin()) &&
                 accountWithGoldService.findOne(Const.amountInAccountForPaymentInFiftyK,Const.serviceBuyGoldByYxi).getPassword().equals(Const.accountWithGoldIsEmpty.getPassword()))
