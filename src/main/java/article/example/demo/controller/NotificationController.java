@@ -48,31 +48,31 @@ public class NotificationController {
                 String.valueOf(codepro)+ "&" + key+ "&" + label;
 
         String paramStringHash1 = GetHash(paramString);
-
+        AccountWithGold accountWithGoldByOperationId = accountWithGoldService.findAccountByOperationId(operation_id);
         try {
-            if (paramStringHash1.equals(sha1_hash) && !codepro && !unaccepted) {
+            if (paramStringHash1.equals(sha1_hash) && accountWithGoldByOperationId == null) {
                 AccountWithGold accountWithGold = accountWithGoldService.findOne(withdraw_amount.doubleValue(), label);
-                accountWithGoldService.delete(accountWithGold.getId());
+                //accountWithGoldService.delete(accountWithGold.getId());
                 this.sender.send("Ваш аккаунт",
                         "Вот аккаунт на котором лежит ваше золото:" +
                                 " login - " + accountWithGold.getLogin() +
-                                " password - " + accountWithGold.getPassword(), /*+
-                                " withdraw_amount + [" + withdraw_amount.doubleValue() +
-                                "] amount + [" + Math.ceil(amount.doubleValue()) +
-                        "] label - [" + label + "]",*/
+                                " password - " + accountWithGold.getPassword(),
                         email);
+                accountWithGold.setOperationId(operation_id);
+                accountWithGoldService.save(accountWithGold);
+
                 PaymentOrderAnonim paymentOrderAnonim = new PaymentOrderAnonim();
                 paymentOrderAnonim.setService(label);
                 paymentOrderAnonim.setCost(amount.toString());
                 paymentOrderAnonim.setEmail(email);
                 paymentOrderAnonim.setGold(String.valueOf(withdraw_amount.doubleValue()/2) + this.currency);
                 anonimOrderService.save(paymentOrderAnonim);
-            } else {
+            } /*else {
                 this.sender.send("Не получилось",
                         "paramStringHash1 = " + paramStringHash1 +
                                 " sha1_hash = " + sha1_hash + " paramString = " + paramString
                                 + " codepro = " + codepro + " email = " + email + " unaccepted = " + unaccepted, "myhytdinov@yandex.ru");
-            }
+            }*/
         } catch (Exception | Error ex) {
             this.sender.send("Не получилось",
                     "paramStringHash1 = " + paramStringHash1 +

@@ -18,10 +18,11 @@ public class AccountWithGoldService {
     @Autowired
     private DataSource dataSource;
 
-    public AccountWithGold findOne(Double amount, String service) throws SQLException, CloneNotSupportedException {
+    public AccountWithGold findOne(Double amount, String service) {
         for (AccountWithGold accountWithGold: accountWithGoldRepository.findAll()) {
             if (accountWithGold.getAmount().equals(amount) &&
-                    accountWithGold.getService().equals(service)) return accountWithGold;
+                    accountWithGold.getService().equals(service) &&
+                    (accountWithGold.getOperationId() == null || accountWithGold.getOperationId() == "")) return accountWithGold;
         }
         return Const.accountWithGoldIsEmpty;
 
@@ -53,5 +54,16 @@ public class AccountWithGoldService {
 
     public void delete(long id) {
         accountWithGoldRepository.deleteById(id);
+    }
+
+    public void save(AccountWithGold accountWithGold) {
+        accountWithGoldRepository.save(accountWithGold);
+    }
+
+    public AccountWithGold findAccountByOperationId(String operationId) {
+        for (AccountWithGold accountWithGold: accountWithGoldRepository.findAll()) {
+            if (accountWithGold.getOperationId().equals(operationId)) return accountWithGold;
+        }
+        return null;
     }
 }
