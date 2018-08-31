@@ -19,7 +19,13 @@ public class AccountWithGoldService {
     private DataSource dataSource;
 
     public AccountWithGold findOne(Double amount, String service) throws SQLException, CloneNotSupportedException {
-        AccountWithGold tempAcc = null;
+        for (AccountWithGold accountWithGold: accountWithGoldRepository.findAll()) {
+            if (accountWithGold.getAmount().equals(amount) &&
+                    accountWithGold.getService().equals(service)) return accountWithGold;
+        }
+        return Const.accountWithGoldIsEmpty;
+
+        /*AccountWithGold tempAcc = null;
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from account_with_gold where amount = ? and service = ?");
         preparedStatement.setDouble(1, amount);
@@ -42,7 +48,7 @@ public class AccountWithGoldService {
         preparedStatement.close();
         connection.close();
         if (tempAcc==null) return Const.accountWithGoldIsEmpty;
-        return tempAcc;
+        return tempAcc;*/
     }
 
     public void delete(long id) {
