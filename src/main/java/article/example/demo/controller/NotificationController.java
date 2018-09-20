@@ -50,7 +50,8 @@ public class NotificationController {
         String paramStringHash1 = GetHash(paramString);
         AccountWithGold accountWithGoldByOperationId = accountWithGoldService.findAccountByOperationId(operation_id);
         try {
-            if (paramStringHash1.equals(sha1_hash) && accountWithGoldByOperationId == null) {
+            if (paramStringHash1.equals(sha1_hash) && accountWithGoldByOperationId == null &&
+                    operation_id != "test-notification") {
                 AccountWithGold accountWithGold = accountWithGoldService.findOne(withdraw_amount.doubleValue(), label);
                 //accountWithGoldService.delete(accountWithGold.getId());
                 this.sender.send("Ваш аккаунт",
